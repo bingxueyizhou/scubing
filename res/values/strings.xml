@@ -27,7 +27,7 @@
     <string name="reset">重置</string>
     <string name="calculate">计算绩点</string>
     <string name="remember_id">记住账号</string>
-    <string name="ato_login">自动登录</string>
+    <string name="ato_login">自动校验</string>
     
     <!-- mview_app -->
     <string name="grade_all">查询成绩</string>
@@ -40,5 +40,8 @@
     <!-- mapp_cmd -->
     <string name="app_cmd_first">冰雪一舟</string>
     <string name="app_cmd_edit_hint">请输入命令符</string>
+    
+    <!-- mapp_evaluation -->
+    <string name="app_evaluation">一键评教</string>
 
 </resources>

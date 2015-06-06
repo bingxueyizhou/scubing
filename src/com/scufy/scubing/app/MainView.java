@@ -1,19 +1,11 @@
 package com.scufy.scubing.app;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
 
 import com.scufy.scubing.R;
 import com.scufy.scubing.data.Setting;
 import com.scufy.scubing.data.TheAccount;
+import com.scufy.util.AccountChecker;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -26,7 +18,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,25 +36,26 @@ import android.widget.TextView;
 
 public class MainView extends Activity{
 	
-	//���ݿ��Ƶ���
+	//other class
 	Setting mainSettings;
 	TheAccount mainAccount;
 	
-	//һЩ�����ı���
+	//main value
 	public static MainView instance = null;
 	private TextView mTab1, mTab2, mTab3;
-	private int i_zero = 0;// ����ͼƬƫ����
-	private int i_one;//����ˮƽ����λ��
+	private int i_zero = 0;	//
+	private int i_one;		//
 	private int i_two;
 	private ViewPager vPager;
 	//private View thisLayout;
 	//private LayoutInflater inflater;
 	private int TabIndex = 0;
 	
-	//�ؼ�
+	//control
 	private RelativeLayout click_about;
 	private RelativeLayout click_allgrade;
 	private RelativeLayout click_tools;
+	private RelativeLayout click_evaluation;
 	private Button bu_login;
 	private Button bu_reset;
 	private CheckBox cBox_remember;
@@ -71,22 +63,32 @@ public class MainView extends Activity{
 	private EditText ed_id;
 	private EditText ed_pwd;
 	
-	//�������
-	private static String log_url;
-	private int log_status = 0;//0-δ��¼ 1-��¼�ɹ� 2,3-��¼ʧ�� 
+	/*loging status
+	 * 0-未变化 1-成功 2-失败 3-没有网络 4-未知错误
+	 */
+	private int log_status = 0;
 	
-	//����message���߳�
-	private final int MSG_LOGIN_SUCCESS = 0;
-	private final int MSG_LOGIN_FAIL = 1;
+	//handler message
+	private final int MSG_LOGIN_SUCCESS  = 1;
+	private final int MSG_LOGIN_FAIL 	 = 2;
+	private final int MSG_NO_NETWORK	 = 3;
+	private final int MSG_UNDEFINE_ERROR = 4;
 	@SuppressLint("HandlerLeak")
 	private Handler uihandler = new Handler(){	
 		public void handleMessage(Message msg){
+			log_status = msg.what;
 			switch(msg.what){
 			case MSG_LOGIN_SUCCESS:
-				Toast.makeText(MainView.this, "��¼�ɹ�", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainView.this, "成功", Toast.LENGTH_SHORT).show();
 				break;
 			case MSG_LOGIN_FAIL:
-				Toast.makeText(MainView.this, "��¼ʧ��", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainView.this, "失败", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_NO_NETWORK:
+				Toast.makeText(MainView.this, "没有网络", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_UNDEFINE_ERROR:
+				Toast.makeText(MainView.this, "未知错误", Toast.LENGTH_SHORT).show();
 				break;
 			}
 		}
@@ -99,7 +101,7 @@ public class MainView extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_view);
 
-		//����activityʱ���Զ����������
+		//when activity start hide input software
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
@@ -109,7 +111,7 @@ public class MainView extends Activity{
 		
 		
 		mTab1 = (TextView) findViewById(R.id.tv_main_app);
-		mTab1.setBackgroundColor(0xffe5e5e5);//���õ�һ������
+		mTab1.setBackgroundColor(0xffe5e5e5);//background color
 		mTab1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -132,13 +134,13 @@ public class MainView extends Activity{
 		});
 		
 		
-		//��ȡ��Ļ��ǰ�ֱ���
+		//get screen size
 		DisplayMetrics  dm = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dm);     
 		int displayWidth = dm.widthPixels;
 		//int displayHeight = dm.heightPixels;
 		
-		//����ˮƽ����ƽ�ƴ�С
+		//split screen
         i_one = displayWidth/3;
         i_two = i_one*2;
        
@@ -181,7 +183,7 @@ public class MainView extends Activity{
 					break;
 				}
 				TabIndex = arg0;
-				animation.setFillAfter(true);// True:ͼƬͣ�ڶ�������λ��
+				animation.setFillAfter(true);// True:baidu
 				animation.setDuration(150);
 			}
 			
@@ -192,30 +194,27 @@ public class MainView extends Activity{
 			public void onPageScrollStateChanged(int arg0) {}
 		});
 	
-		//��Ҫ��ҳ��ʾ��Viewװ��������
+		//initialize View
         LayoutInflater mLi = LayoutInflater.from(this);
         View view1 = mLi.inflate(R.layout.mview_app, null);
         View view2 = mLi.inflate(R.layout.mview_account, null);
         View view3 = mLi.inflate(R.layout.mview_setting, null);
         
-        //ÿ��ҳ���view����
+        //add view to a List
         final ArrayList<View> views = new ArrayList<View>();
         views.add(view1);
         views.add(view2);
         views.add(view3);
-		//���ViewPager������������
+		//ViewPager adapter
         PagerAdapter mPagerAdapter = new PagerAdapter() {
-		
 			@Override
 			public boolean isViewFromObject(View arg0, Object arg1) {
 				return arg0 == arg1;
 			}
-			
 			@Override
 			public int getCount() {
 				return views.size();
 			}
-		
 			@Override
 			public void destroyItem(View container, int position, Object object) {
 				((ViewPager)container).removeView(views.get(position));
@@ -235,9 +234,8 @@ public class MainView extends Activity{
 		
 		vPager.setAdapter(mPagerAdapter);
 
-		
-		/*ÿ����ҳ�ļ����¼�*/
-		//-----����ҳ��-----
+		//-----setting page-----
+		//when click about
 		click_about = (RelativeLayout)view3.findViewById(R.id.item_toclick_about);
 		click_about.setOnClickListener(new OnClickListener() {
 			
@@ -248,15 +246,15 @@ public class MainView extends Activity{
 				
 			}
 		});
-		//-----Ӧ��ҳ��-----
-		//���гɼ�����
+		//-----application page-----
+		//when click all grade
 		click_allgrade = (RelativeLayout)view1.findViewById(R.id.item_cliked_allGrade);
 		click_allgrade.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				if (log_status != 1){
-					Toast.makeText(MainView.this, "δ��¼", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
 					return ;
 				}else{
 					Intent mainView_to_mainAllGrade = new Intent(
@@ -265,10 +263,9 @@ public class MainView extends Activity{
 				}
 			}
 		});
-		//���߽���
+		//when click developer tools
 		click_tools = (RelativeLayout)view1.findViewById(R.id.item_cliked_tools);
 		click_tools.setOnClickListener(new OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				Intent mainView_to_devTools = new Intent(
@@ -276,32 +273,40 @@ public class MainView extends Activity{
 				startActivity(mainView_to_devTools);
 			}
 		});
-		//-----�˻�����-----
-		//������ѡ��
+		//when click evaluation
+		click_evaluation = (RelativeLayout)view1.findViewById(R.id.item_cliked_evaluation);
+		click_evaluation.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				new Evaluation(instance).start();
+			}
+		});
+		//-----main page-----
+		//two check box
 		cBox_atoLogin = (CheckBox)view2.findViewById(R.id.cBox_isAtoLogin);
 		cBox_remember = (CheckBox)view2.findViewById(R.id.cBox_isRemember_ID);
-		cBox_atoLogin.setChecked(mainSettings.getData_atoLogin());
-		cBox_remember.setChecked(mainSettings.getData_saveAccount());
+		cBox_atoLogin.setChecked(mainSettings.isAtoLogin());
+		cBox_remember.setChecked(mainSettings.isSaveAccount());
 		cBox_atoLogin.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				mainSettings.setData_atoLogin(isChecked);
+				mainSettings.setAtoLogin(isChecked);
 			}
 		});
 		cBox_remember.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				mainSettings.setData_saveAccount(isChecked);
+				mainSettings.setSaveAccount(isChecked);
 			}
 		});
-		//�����༭��
+		//two Edit Text box
 		ed_id  = (EditText)view2.findViewById(R.id.eT_student_num);
 		ed_pwd = (EditText)view2.findViewById(R.id.eT_password);
-		if (mainSettings.getData_saveAccount()){
-			ed_id.setText(mainAccount.getData_stdId());
-			ed_pwd.setText(mainAccount.getData_jwcPwd());
+		if (mainSettings.isSaveAccount()){
+			ed_id.setText(mainAccount.getStdId());
+			ed_pwd.setText(mainAccount.getJWCPwd());
 		}
-		//���谴ť
+		//button reset
 		bu_reset = (Button)view2.findViewById(R.id.bu_reset);
 		bu_reset.setOnClickListener(new OnClickListener() {
 			
@@ -311,7 +316,7 @@ public class MainView extends Activity{
 				ed_pwd.setText("");
 			}
 		});
-		//��¼��ť
+		//button login
 		bu_login = (Button)view2.findViewById(R.id.bu_login);
 		bu_login.setOnClickListener(new OnClickListener() {
 			
@@ -321,89 +326,40 @@ public class MainView extends Activity{
 				String jwc_pwd = ed_pwd.getText().toString();
 				
 				if (std_num.length() <= 1){
-					Toast.makeText(MainView.this, "������ѧ��", Toast.LENGTH_SHORT).show();		
+					Toast.makeText(MainView.this, "请输入账号", Toast.LENGTH_SHORT).show();		
 					return;
 				}
 				
 				if (jwc_pwd.length() <= 1){
-					Toast.makeText(MainView.this, "����������", Toast.LENGTH_SHORT).show();
+					Toast.makeText(MainView.this, "请输入密码", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				
-				if(mainSettings.getData_saveAccount()){
-					mainAccount.setData_stdId(std_num);
-					mainAccount.setData_jwcPwd(jwc_pwd);
+				if(mainSettings.isSaveAccount()){
+					mainAccount.setSetId(std_num);
+					mainAccount.setJWCPwd(jwc_pwd);
 				}
 				
 				Jwc_login(std_num,jwc_pwd);
 			}
 		});
 
-		if(mainSettings.getData_atoLogin()){
-			Jwc_login(mainAccount.getData_stdId(), mainAccount.getData_jwcPwd());
+		if(mainSettings.isAtoLogin()){
+			Jwc_login(mainAccount.getStdId(), mainAccount.getJWCPwd());
 		}
 	}
 	
 
 	private void Jwc_login(String num,String key){
-		log_url = "http://202.115.47.141//loginAction.do?zjh="
-				+ num + "&mm=" + key;
-		
-		log_status = 0;
-		(new Thread(){
-    		@Override
-    		public void run(){
-    			
-    	        HttpPost httppost = new HttpPost(log_url);
-    	        HttpClient httpclient = new DefaultHttpClient();
-    	        HttpResponse httpResponse = null;//��Ӧ����
-                
-    	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-    	        
-    	        //��½��ҳ����ȡcookie
-    	        try {
-					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.ASCII));
-					
-					httpResponse = httpclient.execute(httppost);
-					
-					if (httpResponse.getStatusLine().getStatusCode() ==200){
-						log_status = 1;
-						Log.i("ģ���½", "�ɹ�");
-					}else{
-						log_status = 2;
-						Log.i("ģ���½", "ʧ��");
-					}
-					
-				} catch (Exception e) {
-					log_status = 3;
-					Log.i("", "��ʧ��");
-					e.printStackTrace();
-				}
-    		}
-    	}).start();
-		Waiting(2000,"不知道");
+		new Thread(new AccountChecker(num, key, uihandler)).start();
+		Waiting(2000,"账号检查中");
 	}
 
 	private long waiting_long;
-	private void SendMessageInfo(int code){
-		Message msg = new Message();
-		//code 0-��¼��Ϣ
-		switch(code){
-		case 0:
-			if(log_status == 1){
-				msg.what = MSG_LOGIN_SUCCESS;
-				uihandler.sendMessage(msg);
-			}else {
-				msg.what = MSG_LOGIN_FAIL;
-				uihandler.sendMessage(msg);
-			}
-			break;
-		}
-	}
 	private void Waiting(long l,String info){
 		waiting_long = l;
 		final ProgressDialog proDialog = android.app.ProgressDialog.show(
-				MainView.this, info, "登录中");
+				MainView.this, info, "请耐心等待");
 		Thread thread = new Thread(){
 			public void run(){
 				try{
@@ -411,8 +367,7 @@ public class MainView extends Activity{
 		        }catch (InterruptedException e){
 		            e.printStackTrace();
 		        }
-				SendMessageInfo(0);
-		        proDialog.dismiss();//���򲻿�����䣬��������Ῠ����
+		        proDialog.dismiss();//it will cause ANR without i
 		    }
 		};
 		thread.start();

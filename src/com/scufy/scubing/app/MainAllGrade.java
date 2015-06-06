@@ -112,7 +112,7 @@ public class MainAllGrade extends Activity{
     			
     			TheAccount acco = new TheAccount(cxt);
     			String log_url = "http://202.115.47.141//loginAction.do?zjh="
-    					+ acco.getData_stdId() + "&mm=" + acco.getData_jwcPwd();
+    					+ acco.getStdId() + "&mm=" + acco.getJWCPwd();
     			System.out.println(log_url);
     	        HttpPost httppost = new HttpPost(log_url);
     	        HttpClient httpclient = new DefaultHttpClient();

@@ -108,6 +108,9 @@ public final class R {
         /**  mapp_cmd 
          */
         public static final int app_cmd_first=0x7f060013;
+        /**  mapp_evaluation 
+         */
+        public static final int app_evaluation=0x7f060015;
         public static final int app_name=0x7f060000;
         public static final int ato_login=0x7f06000e;
         public static final int calculate=0x7f06000c;

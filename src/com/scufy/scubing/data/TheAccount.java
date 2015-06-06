@@ -6,19 +6,20 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 /**
- * @author �ޱ�
- * �˻��������
+ * @author zoubing
+ * User Account manager
  */
 public class TheAccount {
-	/* ��Ϣ����
-	 * 1��ѧ��
-	 * 2����������
+	/*
+	 * file: account
+	 * id :std_id
+	 * key:jwc_pwd
 	 */
-	/*�ೣ��*/
-	private final String XML_NAME = "account";
+	/*value of xml file structure*/
+	private final String XML_NAME	  = "account";
 	private final String INFO_STD_ID  = "std_id";
 	private final String INFO_JWC_PWD = "jwc_pwd";
-	//�����
+	
 	private SharedPreferences spV;
 	private Editor spEditor;
 	private Context TheCXT;
@@ -31,37 +32,43 @@ public class TheAccount {
 		save();
 	}
 	
-	/**��ȡ 	ѧ��
-	 * @return ѧ��
+	/**
+	 * get student id
+	 * @return
 	 */
-	public String getData_stdId(){
+	public String getStdId(){
 		return spV.getString(INFO_STD_ID, "");
 	}
 	
-	/**����  ѧ��
-	 * @param s ѧ��
+	/**
+	 * set student id
+	 * @param s student id
 	 */
-	public void setData_stdId(String s){
+	public void setSetId(String s){
 		spEditor.putString(INFO_STD_ID, s);
 		save();
 	}
 	
-	/**��ȡ 	��������
-	 * @return ��������
+	/**
+	 * get jiaowuchu password
+	 * @return String of jiaowuchu key
 	 */
-	public String getData_jwcPwd(){
+	public String getJWCPwd(){
 		return spV.getString(INFO_JWC_PWD, "");
 	}
 	
-	/**����  ��������
-	 * @param s ��������
+	/**
+	 * set JWC password
+	 * @param s String of JWC key
 	 */
-	public void setData_jwcPwd(String s){
+	public void setJWCPwd(String s){
 		spEditor.putString(INFO_JWC_PWD, s);
 		save();
 	}
 	
-	/** ������Ϣ�ĵ���ÿ���ļ����ö���Ҫ�� **/
+	/**
+	 * main sava function
+	 */
 	private void save(){
 		spEditor.commit();
 	}

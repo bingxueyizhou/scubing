@@ -11,15 +11,17 @@ import android.content.SharedPreferences.Editor;
  */
 
 public class Setting {
-	/* ��Ϣ����
-	 * 1���Ƿ��Զ���¼
-	 * 2���Ƿ񱣴��˺�
+	/*
+	 * file:setting
+	 * set0:ato_login
+	 * set1:save_account
 	 */
-	/*�ೣ��*/
-	private final String XML_NAME = "setting";
-	private final String SET_ATO_LOGIN = "ato_login";
-	private final String SET_SAVE_ACCOUNT = "save_account";
-	//�����
+	/*value of xml file structure*/
+	private final String XML_NAME 			= "setting";
+	private final String SET_ATO_LOGIN 		= "ato_check";
+	private final String SET_SAVE_ACCOUNT 	= "save_account";
+	
+	//other value
 	private SharedPreferences spV;
 	private Editor spEditor;
 	private Context TheCXT;
@@ -32,36 +34,40 @@ public class Setting {
 		save();
 	}
 	
-	/**��ȡ 	�Ƿ��Զ���¼
-	 * @return �����е��Զ���¼��ֵ
+	/**
+	 * if it's automatic check
+	 * @return
 	 */
-	public boolean getData_atoLogin(){
+	public boolean isAtoLogin(){
 		return spV.getBoolean(SET_ATO_LOGIN, false);
 	}
 	
-	/**����  �Ƿ��Զ���¼
-	 * @param b �Զ���¼��ֵ
+	/**
+	 * set if it need automatic check
+	 * @param b
 	 */
-	public void setData_atoLogin(boolean b){
+	public void setAtoLogin(boolean b){
 		spEditor.putBoolean(SET_ATO_LOGIN, b);
 		save();
 	}
-	/**��ȡ 	�Ƿ񱣴��˺�
-	 * @return �Ƿ񱣴��˺�
+	/**
+	 * if it need save account
+	 * @return
 	 */
-	public boolean getData_saveAccount(){
+	public boolean isSaveAccount(){
 		return spV.getBoolean(SET_SAVE_ACCOUNT, false);
 	}
 	
-	/**����  �Ƿ񱣴��˺�
-	 * @param b �Ƿ񱣴��˺�
+	/**
+	 * to set Save Account
+	 * @param b
 	 */
-	public void setData_saveAccount(boolean b){
+	public void setSaveAccount(boolean b){
 		spEditor.putBoolean(SET_SAVE_ACCOUNT, b);
 		save();
 	}
 	
-	/** ������Ϣ�ĵ���ÿ���ļ����ö���Ҫ�� **/
+	/** file must commit if it need save **/
 	private void save(){
 		spEditor.commit();
 	}
