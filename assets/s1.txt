@@ -1,0 +1,554 @@
+<script type="text/javascript" src="/dwr/interface/ajaxtool.js"></script>
+<script type="text/javascript" src="/dwr/engine.js"></script>
+<script type="text/javascript" src="/dwr/util.js" ></script>
+<html>
+<head>
+<title>
+学生评估问卷列表
+</title>
+<link href="/css/newcss/project.css" rel="stylesheet" type="text/css">
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="unload()" style="overflow:auto;">
+<form name="WjList" method="POST" action="jxpgXsAction.do">
+ 
+ 
+ 
+		
+		<table width="100%" border="0" align="center" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td class="Linetop"></td>
+			</tr>
+		</table>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0"
+			class="title" id="tblHead">
+			<tr>
+				<td width="80%">
+					<table border="0" align="left" cellpadding="0" cellspacing="0">
+ 
+						<tr>
+							<td>
+								&nbsp;
+							</td>
+							<td valign="middle">
+								&nbsp;
+								<b>列表</b> &nbsp;
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td width="20%">
+ 
+					<table border="0" align="left" cellpadding="0" cellspacing="0"
+						width="100%">
+ 
+						<tr>
+							<td>
+								&nbsp;
+							</td>
+ 
+							<td width="3">
+								&nbsp;
+							</td>
+							<td width="10" align="center">
+								&nbsp;
+							</td>
+							<td width="3">
+								&nbsp;
+							</td>
+ 
+ 
+							<td width="5"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<table width="100%" border="0" align="center" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td class="Linetop"></td>
+			</tr>
+		</table>
+		<table width="100%" border="0" cellpadding="0" cellspacing="0"
+			class="titleTop2">
+				<input name="wjbm" type="hidden" value="">
+				<input name="bpr" type="hidden" value="">
+				<input name="pgnr" type="hidden" value="">
+				<input name="oper" type="hidden" value="">
+				<input name="wjmc" type="hidden" value="">
+				<input name="bprm" type="hidden" value="">
+				<input name="pgnrm" type="hidden" value="">
+			<tr>
+				<td class="pageAlign">
+					<table cellpadding="0" width="100%" class="displayTag"
+						cellspacing="1" border="0" id="user">
+						<thead>
+							<tr>
+ 
+								<th width="10%" class="sortable" align="center">
+									问卷名称
+								</th>
+								<th width="10%" class="sortable" align="center">
+									被评人
+								</th>
+								<th width="50%" class="sortable" align="center">
+									评估内容
+								</th>
+								<th width="10%" class="sortable" align="center">
+									否否已评估
+								</th>
+								<th width="10%" class="sortable" align="center">
+									操作
+								</th>
+							</tr>
+						</thead>
+						
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">刘昌波</td>
+							<td align="center">学习心理学</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20032237#@刘昌波#@学评教（期末）#@学习心理学#@998017020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">汤平</td>
+							<td align="center">大学英语（创意阅读）-4</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20052104#@汤平#@学评教（期末）#@大学英语（创意阅读）-4#@105396020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">张丛耀</td>
+							<td align="center">物联网系统及接口</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20062196#@张丛耀#@学评教（期末）#@物联网系统及接口#@304091030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">张丛耀</td>
+							<td align="center">物联网系统及接口实验</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20062196#@张丛耀#@学评教（期末）#@物联网系统及接口实验#@304092010" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">纪志耿</td>
+							<td align="center">毛泽东思想和中国特色社会主义理论体系概论</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20092094#@纪志耿#@学评教（期末）#@毛泽东思想和中国特色社会主义理论体系概论#@107061050" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">李强</td>
+							<td align="center">软件项目管理</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20102011#@李强#@学评教（期末）#@软件项目管理#@304044020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">武岳</td>
+							<td align="center">物联网通信、控制技术原理</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@20132091#@武岳#@学评教（期末）#@物联网通信、控制技术原理#@304090030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">侯明正</td>
+							<td align="center">形势与政策-4</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@80132147#@侯明正#@学评教（期末）#@形势与政策-4#@998012000" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">张靖宇</td>
+							<td align="center">计算机网络课程设计</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@81086180#@张靖宇#@学评教（期末）#@计算机网络课程设计#@304033010" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">张靖宇</td>
+							<td align="center">计算机网络（全英文）</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@81086180#@张靖宇#@学评教（期末）#@计算机网络（全英文）#@304127030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">蒋欣荣</td>
+							<td align="center">信息系统安全</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@81086285#@蒋欣荣#@学评教（期末）#@信息系统安全#@304066030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">辛卫</td>
+							<td align="center">研究与开发实践</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@82047297#@辛卫#@学评教（期末）#@研究与开发实践#@304070020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">ty2</td>
+							<td align="center">体育-4</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@88800002#@ty2#@学评教（期末）#@体育-4#@888007010" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">严强</td>
+							<td align="center">阿里推荐算法技术与实践</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@qy304004#@严强#@学评教（期末）#@阿里推荐算法技术与实践#@304168020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">学评教（期末）</td>
+							<td align="center">刘忠义</td>
+							<td align="center">阿里推荐算法技术与实践</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000034#@qy304005#@刘忠义#@学评教（期末）#@阿里推荐算法技术与实践#@304168020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">李瑞轩</td>
+							<td align="center">研究与开发实践</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013222050085#@李瑞轩#@研究生助教#@研究与开发实践#@304070020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">李思雯</td>
+							<td align="center">物联网通信、控制技术原理</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040019#@李思雯#@研究生助教#@物联网通信、控制技术原理#@304090030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">杨沛霖</td>
+							<td align="center">计算机网络课程设计</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040169#@杨沛霖#@研究生助教#@计算机网络课程设计#@304033010" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">杨沛霖</td>
+							<td align="center">计算机网络（全英文）</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040169#@杨沛霖#@研究生助教#@计算机网络（全英文）#@304127030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">李飞菲</td>
+							<td align="center">信息系统安全</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040187#@李飞菲#@研究生助教#@信息系统安全#@304066030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">蒋天宇</td>
+							<td align="center">物联网系统及接口</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040202#@蒋天宇#@研究生助教#@物联网系统及接口#@304091030" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">蒋天宇</td>
+							<td align="center">物联网系统及接口实验</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2013223040202#@蒋天宇#@研究生助教#@物联网系统及接口实验#@304092010" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">李雪</td>
+							<td align="center">软件项目管理</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2014223040156#@李雪#@研究生助教#@软件项目管理#@304044020" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+						<tr class="odd" onMouseOut="this.className='even';"
+							onMouseOver="this.className='evenfocus';">
+ 
+							<td align="center">研究生助教</td>
+							<td align="center">朱田</td>
+							<td align="center">毛泽东思想和中国特色社会主义理论体系概论</td>
+							<td align="center">否</td>
+							<td align="center">
+								<img name="0000000035#@zj2014227010032#@朱田#@研究生助教#@毛泽东思想和中国特色社会主义理论体系概论#@107061050" style="cursor: hand;" title="评估"
+									align="center"
+									src="/img/icon/edit.gif"
+									border="0" onclick="evaluation(this)">
+							</td>
+							</tr>
+ 
+				</td>
+			</tr>
+ 
+		</table>
+		<div align="right">
+			<table width="100%" border="0" cellpadding="0" cellspacing="0" ><tr><td align="right">共24项&nbsp;&nbsp;第1/1页&nbsp;&nbsp;<img title="第一页" src="/img/icon/noDownDM2.gif"style="vertical-align:center;" width="11" height="11" />&nbsp;<img title="前一页" src="/img/icon/noDownDM_2.gif"style="vertical-align:center;" width="11" height="11" /><img title="下一页" src="/img/icon/noUpDM_2.gif"style="vertical-align:center;" width="11" height="11" />&nbsp;<img title="最后一页" src="/img/icon/noUpDM2.gif"style="vertical-align:center;" width="11" height="11" />&nbsp;&nbsp;每页显示的记录数&nbsp;<select name="pageSize" onchange="pageSizeChange()"><option value="10" >10项</option><option value="20" >20项</option><option value="30" >30项</option><option value="40" >40项</option><option value="50" >50项</option><option value="100" >100项</option><option value="200" >200项</option><option value="300" selected='selected'>300项</option></select><input   name="page"   type="hidden"   id="page" value="1">&nbsp;<input   name="currentPage"   type="hidden"   id="currentPage" value="1">&nbsp;<input   name="pageNo"   type="text"   id="pageNo"   size="3"   onKeyPress="return   handleEnterOnPageNo();">&nbsp;<img src="/img/icon/go.gif"  name="goto"  id="goto" style="cursor:hand;" title="跳转到" onClick="forward();"><script   type   =   'text/javaScript'>
+function   forward(){     if(!(/^([1-9])(\d{0,})(\d{0,})$/.test(document.all.pageNo.value))){         alert("请输入合法的页号！");         document.all.pageNo.focus();         return false;     }     if(document.all.pageNo.value>1     ){     alert("输入的页数超过了总页数，请重新输入！");         document.all.pageNo.focus();         return false;     }         window.location.href="/jxpgXsAction.do?totalrows=24&page="+   document.all.pageNo.value +"&pageSize="+document.all.pageSize.value;}function   handleEnterOnPageNo(){     if(event.keyCode   ==   13)     {         forward();         return   false;     }     return   true;}function pageSizeChange(){ window.location.href="/jxpgXsAction.do?totalrows=24&pageSize="+document.all.pageSize.value;}function pagination(value){ window.location.href="/jxpgXsAction.do?totalrows=24&page="+value+"&pageSize="+document.all.pageSize.value;}</script></td></tr></table>
+		</div>
+		</form>
+	</body>
+</html>
+<Script language="JavaScript"> 
+function unload(){
+	ajaxtool.getOper("listWj");
+}
+</Script>
+<Script language="JavaScript"> 
+	function check(a){
+            var start=0;
+                var end;
+                var data =a.name;
+                end =data.indexOf("#@",start);
+                var sub = data.substring(start,end);
+                window.document.WjList.wjbm.value=sub;
+ 
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.bpr.value=sub;
+ 
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.bprm.value=sub;
+				//alert("window.document.WjList.bprm.value"+sub);
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.wjmc.value=sub;
+				//alert("window.document.WjList.wjmc.value"+sub);
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.pgnrm.value=sub;
+				//alert("window.document.WjList.pgnrm.value"+sub);
+                start = end + 2;
+                sub = data.substring(start);
+                window.document.WjList.pgnr.value=sub;
+                window.document.WjList.oper.value="wjResultShow";
+ 
+            window.document.WjList.submit();
+        }
+       function evaluation(a){
+           	//alert(a.name);
+                var start=0;
+                var end;
+                var data =a.name;
+                end =data.indexOf("#@",start);
+                var sub = data.substring(start,end);
+                window.document.WjList.wjbm.value=sub;
+ 
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.bpr.value=sub;
+				//alert(sub);
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.bprm.value=sub;
+ 
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.wjmc.value=sub;
+ 
+                start = end + 2;
+                end = data.indexOf("#@",start);
+                sub = data.substring(start,end);
+                window.document.WjList.pgnrm.value=sub;
+ 
+                start = end + 2;
+                sub = data.substring(start);
+                window.document.WjList.pgnr.value=sub;
+                window.document.WjList.oper.value="wjShow";
+                window.document.WjList.submit();
+       }
+</Script>
