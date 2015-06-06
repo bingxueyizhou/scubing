@@ -35,7 +35,32 @@
 	       		android:layout_marginTop="14dp"
 	       		android:gravity="center_vertical"
 	       		android:clickable="true"
-	       		android:background="@drawable/preference_single_item" >
+	       		android:background="@drawable/preference_first_item" >
+	       		<TextView
+	   				android:layout_width="wrap_content" 
+	   				android:layout_height="wrap_content"
+	   				android:padding="8dp" 
+	   				android:text="@string/grade_all"
+	   				android:textSize="17sp"		
+					android:textColor="#000" />
+	       		<ImageView
+	       		    android:contentDescription="@string/z"
+	       			android:layout_width="wrap_content"
+	   				android:layout_height="wrap_content"        	     	
+	   				android:scaleType="matrix"
+	   				android:layout_centerVertical="true"
+	   				android:layout_alignParentRight="true"
+	   				android:clickable="true"
+	   				android:src="@drawable/mm_submenu" />      					
+     		</RelativeLayout>
+     		
+           <RelativeLayout
+                android:id="@+id/item_cliked_evaluation"
+	       		android:layout_width="fill_parent"
+	       		android:layout_height="wrap_content"
+	       		android:gravity="center_vertical"
+	       		android:clickable="true"
+	       		android:background="@drawable/preference_last_item" >
 	       		<TextView
 	   				android:layout_width="wrap_content" 
 	   				android:layout_height="wrap_content"

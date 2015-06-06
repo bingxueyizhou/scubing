@@ -12,10 +12,10 @@ import android.app.Activity;
 import android.content.Intent;
 
 public class Welcome extends Activity {
-	/*�߳̿����ź�*/
-	final int MSG_GO 	= 1;	//�����¸�Activity
-	final int MSG_CRASH = 2;	//����
-	final int MSG_WEL 	= 3;	//��ӭ
+	/*handle message*/
+	final int MSG_GO 	= 1;	//if activity go
+	final int MSG_CRASH = 2;	//if crash
+	final int MSG_WEL 	= 3;	//if to welcome
 	
 	private final long waitTime = 1000;
 	
@@ -38,12 +38,12 @@ public class Welcome extends Activity {
 	};
 	
 	private void showCrash(){
-		Toast.makeText(this, "出错", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "程序出错", Toast.LENGTH_LONG).show();
 		this.finish();
 	}
 	
 	private void showWel(){
-		Toast.makeText(this, "--冰雪一舟--", Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, "--qvbrgw--", Toast.LENGTH_LONG).show();
 	}
 		
 	@Override

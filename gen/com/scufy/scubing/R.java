@@ -68,8 +68,9 @@ public final class R {
         public static final int eT_student_num=0x7f090015;
         public static final int im_version=0x7f090000;
         public static final int item_cliked_allGrade=0x7f090019;
-        public static final int item_cliked_tools=0x7f09001a;
-        public static final int item_toclick_about=0x7f09001b;
+        public static final int item_cliked_evaluation=0x7f09001a;
+        public static final int item_cliked_tools=0x7f09001b;
+        public static final int item_toclick_about=0x7f09001c;
         public static final int main_bottom=0x7f090003;
         public static final int mainweixin=0x7f090002;
         public static final int mapp_allgrade_lV=0x7f09000b;

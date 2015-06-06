@@ -5,12 +5,14 @@ import java.io.LineNumberReader;
 
 import com.scufy.scubing.R;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.SpannedString;
 import android.text.style.TypefaceSpan;
 import android.util.Log;
 import android.view.View.OnKeyListener;
@@ -26,6 +28,29 @@ public class CMDTools extends Activity{
 	//control
 	private TextView main_content;
 	private EditText main_input;
+
+	private final int MSG_SUCCESS = 0;
+	private final int MSG_FAIL	  = 1;
+	private final int MSG_OUTTIME = 2;
+	
+	@SuppressLint("HandlerLeak")
+	private Handler uihandler = new Handler(){
+		public void handleMessage(Message msg){
+			switch(msg.what){
+			case MSG_SUCCESS:
+				Toast.makeText(CMDTools.this, msg.obj.toString(),
+						Toast.LENGTH_SHORT).show();
+				reValueText(msg.obj.toString());
+				break;
+			case MSG_FAIL:
+				reValueText("command fail\n"+msg.obj.toString());
+				break;
+			case MSG_OUTTIME:
+				reValueText("command out time");
+				break;
+			}
+		}
+	};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +88,32 @@ public class CMDTools extends Activity{
 	 * @return
 	 */
 	private String exec(String c){
-		try {  
-            String[] cmdA = { "/bin/sh", "-c", c};  
-            Process process = Runtime.getRuntime().exec(cmdA);
-            process.waitFor();
+		Message msg = new Message();
+		try { 
+            Process process = Runtime.getRuntime().exec(c);
+            
             LineNumberReader br = new LineNumberReader(new InputStreamReader(  
                     process.getInputStream()));  
             StringBuffer sb = new StringBuffer();  
-            String line;  
+            String line;
             while ((line = br.readLine()) != null) {  
                 System.out.println(line);  
                 sb.append(line).append("\n");  
-            }  
+            }
+
+            process.waitFor();
+			msg.obj = sb.toString();
+			msg.what = MSG_SUCCESS;
+			uihandler.sendMessage(msg);
+			
             return sb.toString();  
         } catch (Exception e) {  
             e.printStackTrace();
+            
+			msg.obj = e.toString();
+			msg.what = MSG_FAIL;
+			uihandler.sendMessage(msg);
+			
             return e.toString();
         }
 	}
@@ -94,10 +130,16 @@ public class CMDTools extends Activity{
 				if(imm.isActive()){  
 					imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0 );  
 				}
+				/*
 				Toast.makeText(CMDTools.this, main_input.getText().toString(),
-						Toast.LENGTH_SHORT).show();
-				
-				reValueText(exec(main_input.getText().toString()));
+						Toast.LENGTH_SHORT).show();*/
+				new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						exec(main_input.getText().toString());
+					}
+				}).start();
 				return true;
 			} 
 			return false;
