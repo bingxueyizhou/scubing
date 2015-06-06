@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainweixin"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#ffeeeeee" > 
+     
+    <LinearLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="15dp"
+        android:baselineAligned="true"  
+    	android:background="#ffdddddd"          
+    	>
+    	
+        <LinearLayout
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+          	android:gravity="center_horizontal"
+          	android:orientation="vertical"
+        	android:paddingTop="15dp"
+          	android:layout_weight="1">               	
+            <TextView
+                android:id="@+id/tv_main_app"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="@string/main_app"
+        		android:textColor="@color/tv_tab"
+        		android:textSize="24sp" />                
+    	 </LinearLayout>
+    	 <LinearLayout
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+          	android:gravity="center_horizontal"
+          	android:orientation="vertical"
+        	android:paddingTop="15dp"
+          	android:layout_weight="1">               	
+            <TextView
+                android:id="@+id/tv_main_account"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="@string/main_account"
+        		android:textColor="@color/tv_tab"
+        		android:textSize="24sp" />            
+    	 </LinearLayout>
+    	 <LinearLayout
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+          	android:gravity="center_horizontal"
+          	android:orientation="vertical"
+        	android:paddingTop="15dp"
+          	android:layout_weight="1">               	
+            <TextView
+                android:id="@+id/tv_main_setting"
+        		android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:text="@string/main_setting"
+        		android:textColor="@color/tv_tab"
+        		android:textSize="24sp" />                
+    	 </LinearLayout>   
+      
+    </LinearLayout>     
+    <LinearLayout
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" 
+    	android:layout_alignParentTop="true"
+    	android:layout_above="@id/main_bottom"       
+        android:orientation="vertical" >
+        
+        <android.support.v4.view.ViewPager
+        	android:id="@+id/tabpager"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:layout_gravity="center" > 
+        </android.support.v4.view.ViewPager>  
+    </LinearLayout>
+
+   
+
+</RelativeLayout>

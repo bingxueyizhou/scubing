@@ -8,7 +8,24 @@
 package com.scufy.scubing;
 
 public final class R {
+    public static final class anim {
+        public static final int fade_in=0x7f040000;
+        public static final int fade_out=0x7f040001;
+        public static final int head_in=0x7f040002;
+        public static final int head_out=0x7f040003;
+        public static final int hold=0x7f040004;
+        public static final int hold_long=0x7f040005;
+        public static final int push_bottom_in=0x7f040006;
+        public static final int push_bottom_out=0x7f040007;
+        public static final int push_top_in=0x7f040008;
+        public static final int push_top_in2=0x7f040009;
+        public static final int push_top_out=0x7f04000a;
+        public static final int push_top_out2=0x7f04000b;
+    }
     public static final class attr {
+    }
+    public static final class color {
+        public static final int tv_tab=0x7f080000;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -17,27 +34,115 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int ic_preference_first_normal=0x7f020001;
+        public static final int ic_preference_first_pressed=0x7f020002;
+        public static final int ic_preference_last_normal=0x7f020003;
+        public static final int ic_preference_last_pressed=0x7f020004;
+        public static final int ic_preference_normal=0x7f020005;
+        public static final int ic_preference_pressed=0x7f020006;
+        public static final int ic_preference_single_normal=0x7f020007;
+        public static final int ic_preference_single_pressed=0x7f020008;
+        public static final int mm_submenu=0x7f020009;
+        public static final int mm_submenu_normal=0x7f02000a;
+        public static final int mm_submenu_pressed=0x7f02000b;
+        public static final int preference_first_item=0x7f02000c;
+        public static final int preference_item=0x7f02000d;
+        public static final int preference_last_item=0x7f02000e;
+        public static final int preference_single_item=0x7f02000f;
+        public static final int yf_logo_background=0x7f020010;
+        public static final int yf_logo_m=0x7f020011;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int bu_login=0x7f090012;
+        public static final int bu_reset=0x7f090014;
+        public static final int cBox_isAtoLogin=0x7f090017;
+        public static final int cBox_isRemember_ID=0x7f090016;
+        public static final int cmd_eT_input=0x7f09000d;
+        public static final int cmd_tV_content=0x7f09000c;
+        public static final int eT_password=0x7f090013;
+        public static final int eT_student_num=0x7f090015;
+        public static final int im_version=0x7f090000;
+        public static final int item_cliked_allGrade=0x7f090019;
+        public static final int item_cliked_tools=0x7f09001a;
+        public static final int item_toclick_about=0x7f09001b;
+        public static final int main_bottom=0x7f090003;
+        public static final int mainweixin=0x7f090002;
+        public static final int mapp_allgrade_lV=0x7f09000b;
+        public static final int mapp_allgrade_tV=0x7f09000a;
+        public static final int mshow_cBox_lv=0x7f09000e;
+        public static final int mshow_tV_Name_lv=0x7f09000f;
+        public static final int mshow_tV_marks_lv=0x7f090010;
+        public static final int mshow_tV_point_lv=0x7f090011;
+        public static final int scrollView_app=0x7f090018;
+        public static final int tV_about_info=0x7f090001;
+        public static final int tabpager=0x7f090007;
+        public static final int title=0x7f090008;
+        public static final int title_bottom=0x7f090009;
+        public static final int tv_main_account=0x7f090005;
+        public static final int tv_main_app=0x7f090004;
+        public static final int tv_main_setting=0x7f090006;
     }
     public static final class layout {
-        public static final int welcome=0x7f030000;
-    }
-    public static final class menu {
-        public static final int welcome=0x7f070000;
+        public static final int main_about=0x7f030000;
+        public static final int main_view=0x7f030001;
+        public static final int mapp_allgrade=0x7f030002;
+        public static final int mapp_cmd=0x7f030003;
+        public static final int mapp_grades_lv=0x7f030004;
+        public static final int mview_account=0x7f030005;
+        public static final int mview_app=0x7f030006;
+        public static final int mview_setting=0x7f030007;
+        public static final int welcome=0x7f030008;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f050002;
+        /**  mview_setting 
+         */
+        public static final int about=0x7f060006;
+        public static final int app_cmd=0x7f060011;
+        public static final int app_cmd_edit_hint=0x7f060014;
+        /**  mapp_cmd 
+         */
+        public static final int app_cmd_first=0x7f060013;
+        public static final int app_name=0x7f060000;
+        public static final int ato_login=0x7f06000e;
+        public static final int calculate=0x7f06000c;
+        /**  mview_app 
+         */
+        public static final int grade_all=0x7f06000f;
+        public static final int grade_cal=0x7f060010;
+        public static final int login=0x7f06000a;
+        public static final int main_account=0x7f060004;
+        /**  main_view 
+         */
+        public static final int main_app=0x7f060003;
+        public static final int main_setting=0x7f060005;
+        public static final int password=0x7f060009;
+        public static final int remember_id=0x7f06000d;
+        public static final int reset=0x7f06000b;
+        public static final int student_num=0x7f060008;
+        /**  mapp_allgrade 
+         */
+        public static final int the_grade_list=0x7f060012;
+        /**  mview_account 
+         */
+        public static final int the_jwc_id=0x7f060007;
+        /**  main_about 
+         */
+        public static final int version=0x7f060002;
+        public static final int z=0x7f060001;
     }
     public static final class style {
+        public static final int AnimBottom=0x7f070003;
+        public static final int AnimFade=0x7f070002;
+        public static final int AnimHead=0x7f070006;
+        public static final int AnimTop=0x7f070004;
+        public static final int AnimTop2=0x7f070005;
+        public static final int Anim_style=0x7f070007;
+        public static final int Anim_style2=0x7f070008;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
@@ -59,10 +164,31 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
+        /** 模糊
+         */
+        public static final int HeadScale=0x7f07000c;
+        /**  
+	<style name="Anim_style_title" parent="android:Theme">         
+        <item name="android:windowAnimationStyle">@style/AnimFade</item> 
+        <item name="android:windowTitleSize">50dp</item>  
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>      
+	</style>
+	
+	<style name="CustomWindowTitleBackground">  
+       <item name="android:background">@drawable/title_bar</item>  
+	</style> 
+         */
+        public static final int MyDialogStyle=0x7f070009;
+        /** 模糊
+         */
+        public static final int MyDialogStyleBottom=0x7f07000a;
+        /** 模糊
+         */
+        public static final int MyDialogStyleTop=0x7f07000b;
     }
 }

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+	<LinearLayout 
+	 			android:layout_width="fill_parent"
+	 			android:layout_height="45dp"
+	 			android:id="@+id/title" 
+	 			android:background="#ffdddddd"
+	 			android:gravity="center_horizontal|center_vertical"  >  
+	    <TextView
+	       		android:layout_width="wrap_content" 
+	       		android:layout_height="wrap_content" 
+	       		android:text="@string/the_jwc_id"
+	       		android:textSize="20sp"		
+				android:textColor="#ffff0000" />       
+	</LinearLayout>
+
+	<RelativeLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:gravity="top"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin" >
+
+	    <Button
+	        android:id="@+id/bu_login"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/eT_password"
+	        android:layout_below="@+id/eT_password"
+	        android:layout_marginTop="80dp"
+	        android:gravity="center"
+	        android:text="@string/login" />
+
+	    <Button
+	        android:id="@+id/bu_reset"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/bu_login"
+	        android:layout_alignRight="@+id/eT_student_num"
+	        android:text="@string/reset" />
+
+	    <EditText
+	        android:id="@+id/eT_student_num"
+	        android:layout_width="250dp"
+	        android:layout_height="50dp"
+	        android:layout_alignRight="@+id/eT_password"
+	        android:layout_marginTop="55dp"
+	        android:ems="10"
+	        android:hint="@string/student_num"
+	        android:inputType="number" />
+
+	    <EditText
+	        android:id="@+id/eT_password"
+	        android:layout_width="250dp"
+	        android:layout_height="50dp"
+	        android:layout_below="@+id/eT_student_num"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="20dp"
+	        android:ems="10"
+	        android:hint="@string/password"
+	        android:inputType="number"
+	        android:password="true"/>
+
+	    <CheckBox
+	        android:id="@+id/cBox_isRemember_ID"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/eT_password"
+	        android:layout_below="@+id/eT_password"
+	        android:layout_marginTop="16dp"
+	        android:text="@string/remember_id" />
+
+	    <CheckBox
+	        android:id="@+id/cBox_isAtoLogin"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBaseline="@+id/cBox_isRemember_ID"
+	        android:layout_alignBottom="@+id/cBox_isRemember_ID"
+	        android:layout_alignLeft="@+id/bu_reset"
+	        android:text="@string/ato_login" />
+
+	</RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <!-- 上面标题 -->
+    <LinearLayout 
+			android:id="@+id/title" 
+			android:layout_width="fill_parent"
+			android:layout_height="45dp"
+			android:background="#ffdddddd"
+			android:gravity="center_horizontal|center_vertical"  >  
+   			<TextView
+	       		android:layout_width="wrap_content" 
+	       		android:layout_height="wrap_content" 
+	       		android:text="@string/the_grade_list"
+	       		android:textSize="20sp"		
+				android:textColor="#ffff0000" />       
+	</LinearLayout>
+	
+    <!-- 下部成绩显示 -->
+    
+    <LinearLayout
+        android:id="@+id/title_bottom"
+	    android:layout_width="fill_parent"
+	    android:layout_height="40dp"
+	    android:layout_alignParentBottom="true"
+	    android:orientation="vertical" 
+		android:background="#ffdddddd">
+        <TextView 
+            android:id="@+id/mapp_allgrade_tV"
+            android:layout_width="wrap_content" 
+       		android:layout_height="wrap_content" 
+       		android:text="@string/z"/>
+    </LinearLayout>
+    
+    <!-- 成绩ListView -->
+    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/title"
+	    android:layout_above="@id/title_bottom"
+	    android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/mapp_allgrade_lV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
+
+    
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <CheckBox
+        android:id="@+id/mshow_cBox_lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/mshow_tV_Name_lv"
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:gravity="left"
+        android:ellipsize="end"
+        android:text="@string/z" />
+
+    <TextView
+        android:id="@+id/mshow_tV_marks_lv"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:ellipsize="end"
+        android:text="@string/z" />
+
+    <TextView
+        android:id="@+id/mshow_tV_point_lv"
+        android:layout_width="36dp"
+        android:layout_height="20dp"
+        android:gravity="right"
+        android:ellipsize="end"
+        android:text="@string/z"/>
+
+</LinearLayout>
