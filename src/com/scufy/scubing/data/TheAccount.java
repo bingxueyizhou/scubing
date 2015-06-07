@@ -44,7 +44,7 @@ public class TheAccount {
 	 * set student id
 	 * @param s student id
 	 */
-	public void setSetId(String s){
+	public void setStdId(String s){
 		spEditor.putString(INFO_STD_ID, s);
 		save();
 	}

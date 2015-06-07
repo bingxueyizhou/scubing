@@ -3,7 +3,6 @@ package com.scufy.scubing.app;
 import java.util.ArrayList;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.scufy.scubing.R;
 import com.scufy.scubing.data.Setting;
 import com.scufy.scubing.data.TheAccount;
+import com.scufy.scubing.data.VIPList;
 import com.scufy.util.AccountChecker;
 
 import android.annotation.SuppressLint;
@@ -254,6 +255,10 @@ public class MainView extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				Toast.makeText(instance, "该功能出现BUG,修复中", 
+							Toast.LENGTH_SHORT).show();
+				return;
+				/*
 				if (log_status != 1){
 					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
 					return ;
@@ -261,7 +266,7 @@ public class MainView extends Activity{
 					Intent mainView_to_mainAllGrade = new Intent(
 							MainView.this,MainAllGrade.class);
 					startActivity(mainView_to_mainAllGrade);
-				}
+				}*/
 			}
 		});
 		//when click developer tools
@@ -279,13 +284,23 @@ public class MainView extends Activity{
 		click_evaluation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (have_evaluation){
-					Toast.makeText(instance, "请退出后进行下次评教", 
+				if (!new VIPList(instance).isVIP(new TheAccount(instance).getStdId())){
+					Toast.makeText(instance, "由于一些政策或其他原因该功能已经删除", 
 							Toast.LENGTH_SHORT).show();
+					return;
+				}
+				if (log_status != 1){
+					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
+					return ;
 				}else{
-					have_evaluation = true;
-					new Evaluation(instance).getOperation().start();
-					Waiting(5000, "显示成功前不要有操作");
+					if (have_evaluation){
+						Toast.makeText(instance, "请退出后进行下次评教", 
+								Toast.LENGTH_SHORT).show();
+					}else{
+						have_evaluation = true;
+						new Evaluation(instance).getOperation().start();
+						Waiting(5000, "显示成功前不要有操作");
+					}
 				}
 			}
 		});
@@ -344,7 +359,7 @@ public class MainView extends Activity{
 				}
 				
 				if(mainSettings.isSaveAccount()){
-					mainAccount.setSetId(std_num);
+					mainAccount.setStdId(std_num);
 					mainAccount.setJWCPwd(jwc_pwd);
 				}
 				
