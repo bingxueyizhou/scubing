@@ -1,26 +1,14 @@
 package com.scufy.scubing.app;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.HTTP;
+import org.apache.http.message.BasicNameValuePair;
 
 import com.scufy.scubing.data.TheAccount;
+import com.scufy.util.MHttpClient;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -42,45 +30,45 @@ public class Evaluation {
 	private ArrayList<String> mainList = new ArrayList<String>();
 	
 	//handler message
-		private final int MSG_LOGIN_SUCCESS  = 1;
-		private final int MSG_LOGIN_FAIL 	 = 2;
-		private final int MSG_NO_NETWORK	 = 3;
-		private final int MSG_UNDEFINE_ERROR = 4;
-		
-		private final int MSG_FINISH_EXEC	 = 100;
-		@SuppressLint("HandlerLeak")
-		private Handler exechandler = new Handler(){	
-			public void handleMessage(Message msg){
-				switch(msg.what){
-				case MSG_LOGIN_SUCCESS:
-					Toast.makeText(cxt, "一键评教中……", Toast.LENGTH_SHORT).show();
-					break;
-				case MSG_LOGIN_FAIL:
-					Toast.makeText(cxt, "失败", Toast.LENGTH_SHORT).show();
-					break;
-				case MSG_NO_NETWORK:
-					Toast.makeText(cxt, "没有网络", Toast.LENGTH_SHORT).show();
-					break;
-				case MSG_UNDEFINE_ERROR:
-					Toast.makeText(cxt, "未知错误", Toast.LENGTH_SHORT).show();
-					break;
-				case MSG_FINISH_EXEC:
-					Toast.makeText(cxt, "评价:"+sum_success+"条\n"+
-										 "失败"+sum_fail+"条\n共"+sum_all+"条", 
-										 Toast.LENGTH_SHORT).show();
-					break;
-				}
+	private final int MSG_LOGIN_SUCCESS  = 1;
+	private final int MSG_LOGIN_FAIL 	 = 2;
+	private final int MSG_NO_NETWORK	 = 3;
+	private final int MSG_UNDEFINE_ERROR = 4;
+	private final int MSG_FINISH_EXEC	 = 100;
+	@SuppressLint("HandlerLeak")
+	private Handler exechandler = new Handler(){	
+		public void handleMessage(Message msg){
+			switch(msg.what){
+			case MSG_LOGIN_SUCCESS:
+				Toast.makeText(cxt, "一键评教中……", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_LOGIN_FAIL:
+				Toast.makeText(cxt, "失败", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_NO_NETWORK:
+				Toast.makeText(cxt, "没有网络", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_UNDEFINE_ERROR:
+				Toast.makeText(cxt, "未知错误", Toast.LENGTH_SHORT).show();
+				break;
+			case MSG_FINISH_EXEC:
+				Toast.makeText(cxt, "评价:"+sum_success+"条\n"+
+									 "失败"+sum_fail+"条\n共"+sum_all+"条", 
+									 Toast.LENGTH_SHORT).show();
+				Log.e("res","评价:"+sum_success+"条\n"+
+						 		"失败"+sum_fail+"条\n共"+sum_all+"条");
+				break;
 			}
-		};
+		}
+	};
 	
 	
 	public Evaluation(Context c){
 		this.cxt = c;
 	}
 	
-	public void start(){
-		new Thread(new Crawler()).start();
-		Log.i("aa","enter");
+	public Thread getOperation(){
+		return new Thread(new Crawler());
 	}
 	
 	class Crawler implements Runnable{
@@ -89,126 +77,130 @@ public class Evaluation {
 		
 		@Override
 		public void run() {
-	        BufferedReader in = null;
-			PrintWriter   out = null;
-	        String line;
-	        URLConnection connection;
-	        
-	        HttpResponse httpResponse = null;
-	        HttpEntity httpEntity = null;
-	        InputStream inputStream = null;
-	        HttpClient httpclient = new DefaultHttpClient();
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-	        
+			MHttpClient client   = new MHttpClient(new DefaultHttpClient());
+			Message msg = new Message();
+			
 			//-------login----------
 			String log_url 		= "http://202.115.47.141//loginAction.do";
 			String log_params 	= "zjh=" + new TheAccount(cxt).getStdId() +
 								  "&mm=" + new TheAccount(cxt).getJWCPwd();
 			
-	        HttpPost httppost = new HttpPost(log_url);
-            
-	        try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.ASCII));
-				httpResponse	= httpclient.execute(httppost);
-				httpEntity 		= httpResponse.getEntity();
-				if (httpResponse.getStatusLine().getStatusCode() ==200){
+			String log_res 		= client.doGet(log_url, log_params);
+			System.out.println(log_res);
+			if (log_res.length() < 4000){
+				if (log_res.length() < 800 && log_res.length() > 1){
 					is_logined = true;
-					Log.i("200", "网络可以");
-				}else{
-					Log.i("~200", "网络不好");
 				}
-				
-			} catch (Exception e) {
-				Log.i("错误", "获取出错");
-				e.printStackTrace();
 			}
-	        
-	        if (!is_logined) return;
+					
+	        if (!is_logined){
+	        	msg.what = MSG_LOGIN_FAIL;
+				exechandler.sendMessage(msg);
+				return;
+			}
 			
 
 			//---------get some data---------
-			String list_res = "";
-			httppost = new HttpPost("http://202.115.47.141//jxpgXsAction.do?pageSize=300");
-	        try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
-				httpResponse = httpclient.execute(httppost);
-				httpEntity 	 = httpResponse.getEntity();
-				
-				if (httpResponse.getStatusLine().getStatusCode() == 200){
-					
-					inputStream = httpEntity.getContent();
-					
-					BufferedReader reader = new BufferedReader(
-							new InputStreamReader(inputStream,"GB2312"));
-					
-					while((line = reader.readLine())!=null){
-						list_res += line;
-					}
+			String list_res = client.doGet("http://202.115.47.141/jxpgXsAction.do",
+											"oper=listWj&pageSize=300");
 			        
-					System.out.println(list_res);
-					int index = 0;
-					int end   = 0;
-					int i_bool= 0;
-					while(true){
-						index = list_res.indexOf("<img name=",index);
-						end   = list_res.indexOf("\" style",index);
-						//i_bool= result.lastIndexOf("否",index);
-						if (index < 0 || end < 0) break;
-						
-						//if (index - i_bool == 40 && i_bool>0){
-							mainList.add(list_res.substring(index+11,end));
-						//}
-						index = end;
-					}
-				}
+			//System.out.println(list_res);
+			if (list_res.indexOf("数据库忙请稍候再试") < 0 && list_res.length() > 1){
 				is_list_success = true;
 				Log.i("读取列表", "成功");
-			} catch (IOException e) {
-				Log.w("读取列表","失败");
+			}else{
 				is_list_success = false;
-				e.printStackTrace();
+				Log.w("读取列表","失败");
+			}
+			int index = 0;
+			int end   = 0;
+			int i_bool= 0;
+			
+			while(true){
+				index = list_res.indexOf("<img name=",index);
+				end   = list_res.indexOf("\" style",index);
+				i_bool= list_res.lastIndexOf("否",index);
+				if (index < 0 || end < 0) break;
+				
+				if (index - i_bool < 50 && i_bool>0){
+					mainList.add(list_res.substring(index+11,end));
+				}
+				index = end;
 			}
 			
-			if (!is_list_success) return;
+			if (!is_list_success){
+				msg.what = MSG_UNDEFINE_ERROR;
+				exechandler.sendMessage(msg);
+				return;
+			}
 			//--------deal num data--------
 			sum_all = mainList.size();
-			System.out.println(mainList);
+			//System.out.println(mainList);
 			
 			//---------post data-----------
-			String res="";
-			Message msg = new Message();
-			msg.what = MSG_FINISH_EXEC;
+			String last_res="";
+			String post_url   = "http://202.115.47.141/jxpgXsAction.do?oper=wjpg";
+			ArrayList<NameValuePair> post_params;
+			String form_url   = "http://202.115.47.141/jxpgXsAction.do";
+			ArrayList<NameValuePair> form_params;
+			Log.i("消息:","a:"+sum_all);
 			for(int i=0;i<mainList.size();i++){
 				String[] r = mainList.get(i).split("#@");
-				try {
-					String post_url   = "http://202.115.47.141/jxpgXsAction.do?oper=wjpg";
-					String post_params= "wjbm="+r[0]+
-										"bpr="+r[1]+
-										"pgnr="+r[2]+
-										"0000000005=10_1"+
-										"0000000006=10_1"+
-										"0000000007=10_1"+
-										"0000000008=10_1"+
-										"0000000009=10_1"+
-										"0000000010=10_1"+
-										"0000000035=10_1"+
-										"zgpj=I Like IT!";
-					
-					httppost = new HttpPost(post_url);
-					httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs,HTTP.UTF_8));
-					httpResponse = httpclient.execute(httppost);
-					httpEntity 	 = httpResponse.getEntity();
-					
-					
-					
-					Log.i("result", res+"\n\nsize:"+res.length());
-				} catch (IOException e) {
-					Log.w("result", e.toString());
-					msg.what = MSG_UNDEFINE_ERROR;
-					e.printStackTrace();
+				
+				form_params = new ArrayList<NameValuePair>();
+				form_params.add(new BasicNameValuePair("wjbm" , r[0]));
+				form_params.add(new BasicNameValuePair("bpr"  , r[1]));
+				form_params.add(new BasicNameValuePair("bprm" , r[2]));
+				form_params.add(new BasicNameValuePair("wjmc" , r[3]));
+				form_params.add(new BasicNameValuePair("pgnrm", r[4]));
+				form_params.add(new BasicNameValuePair("pgnr" , r[5]));
+				form_params.add(new BasicNameValuePair("oper" , "wjShow"));
+	            
+
+				client.doPost(form_url, form_params);
+	                
+				post_params = new ArrayList<NameValuePair>();
+				post_params.add(new BasicNameValuePair("wjbm",r[0]) );
+				post_params.add(new BasicNameValuePair("bpr", r[1]) );
+				post_params.add(new BasicNameValuePair("pgnr",r[5]) );
+				post_params.add(new BasicNameValuePair("zgpj", "IlikeIT") );
+				
+				if (r[1].indexOf("zj") < 0){
+					post_params.add(new BasicNameValuePair("0000000005","10_1") );
+					post_params.add(new BasicNameValuePair("0000000006","10_1") );
+					post_params.add(new BasicNameValuePair("0000000007","10_1") );
+					post_params.add(new BasicNameValuePair("0000000008","10_1") );
+					post_params.add(new BasicNameValuePair("0000000009","10_1") );
+					post_params.add(new BasicNameValuePair("0000000010","10_1") );
+					post_params.add(new BasicNameValuePair("0000000035","10_1") );
+				}else{
+					post_params.add(new BasicNameValuePair("0000000028","10_1") );
+					post_params.add(new BasicNameValuePair("0000000029","10_1") );
+					post_params.add(new BasicNameValuePair("0000000030","10_1") );
+					post_params.add(new BasicNameValuePair("0000000031","10_1") );
+					post_params.add(new BasicNameValuePair("0000000032","10_1") );
+					post_params.add(new BasicNameValuePair("0000000033","10_1") );
 				}
+				
+				
+				/*p = URLEncoder.encode(p,"UTF-8");*/
+				//System.out.println(post_url+"?"+p);
+				
+				last_res = client.doPost(post_url, post_params);
+				
+				if (last_res.indexOf("评估成功") > 0){
+					sum_success ++;
+				}else{
+					sum_fail ++;
+				}
+
+				//Log.i("result", last_res+"\n\nsize:"+last_res.length());//失败-286
+				try {
+					Thread.sleep(100);
+				} catch (Exception e) {}
 			}
 
+			msg.what = MSG_FINISH_EXEC;
 			exechandler.sendMessage(msg);
 		}
 	}

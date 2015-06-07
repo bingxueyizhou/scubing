@@ -50,6 +50,7 @@ public class MainView extends Activity{
 	//private View thisLayout;
 	//private LayoutInflater inflater;
 	private int TabIndex = 0;
+	private boolean have_evaluation = false;
 	
 	//control
 	private RelativeLayout click_about;
@@ -278,7 +279,14 @@ public class MainView extends Activity{
 		click_evaluation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				new Evaluation(instance).start();
+				if (have_evaluation){
+					Toast.makeText(instance, "请退出后进行下次评教", 
+							Toast.LENGTH_SHORT).show();
+				}else{
+					have_evaluation = true;
+					new Evaluation(instance).getOperation().start();
+					Waiting(5000, "显示成功前不要有操作");
+				}
 			}
 		});
 		//-----main page-----
@@ -367,7 +375,7 @@ public class MainView extends Activity{
 		        }catch (InterruptedException e){
 		            e.printStackTrace();
 		        }
-		        proDialog.dismiss();//it will cause ANR without i
+		        proDialog.dismiss();//it will cause ANR without it
 		    }
 		};
 		thread.start();
