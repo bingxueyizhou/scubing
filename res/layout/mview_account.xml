@@ -64,8 +64,7 @@
 	        android:layout_marginTop="20dp"
 	        android:ems="10"
 	        android:hint="@string/password"
-	        android:inputType="number"
-	        android:password="true"/>
+	        android:inputType="textPassword"/>
 
 	    <CheckBox
 	        android:id="@+id/cBox_isRemember_ID"

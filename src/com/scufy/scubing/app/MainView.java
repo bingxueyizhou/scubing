@@ -38,33 +38,35 @@ import android.widget.TextView;
 public class MainView extends Activity{
 	
 	//other class
-	Setting mainSettings;
-	TheAccount mainAccount;
+	protected Setting 	 mainSettings;
+	protected TheAccount mainAccount;
 	
 	//main value
-	public static MainView instance = null;
-	private TextView mTab1, mTab2, mTab3;
-	private int i_zero = 0;	//
-	private int i_one;		//
-	private int i_two;
-	private ViewPager vPager;
+	public  static MainView instance = null;
+	private int 	i_zero = 0;	//
+	private int 	i_one;		//
+	private int 	i_two;
 	//private View thisLayout;
 	//private LayoutInflater inflater;
-	private int TabIndex = 0;
+	private int 	TabIndex = 0;
 	private boolean have_evaluation = false;
+	private String 	std = "";
+	private String 	key = "";
 	
 	//control
-	private RelativeLayout click_about;
-	private RelativeLayout click_allgrade;
-	private RelativeLayout click_tools;
-	private RelativeLayout click_evaluation;
-	private RelativeLayout click_gpa;
-	private Button bu_login;
-	private Button bu_reset;
-	private CheckBox cBox_remember;
-	private CheckBox cBox_atoLogin;
-	private EditText ed_id;
-	private EditText ed_pwd;
+	private RelativeLayout 	click_about;
+	private RelativeLayout 	click_allgrade;
+	private RelativeLayout 	click_tools;
+	private RelativeLayout 	click_evaluation;
+	private RelativeLayout 	click_gpa;
+	private Button 			bu_login;
+	private Button 			bu_reset;
+	private CheckBox 		cBox_remember;
+	private CheckBox 		cBox_atoLogin;
+	private EditText 		ed_id;
+	private EditText 		ed_pwd;
+	private ViewPager 		vPager;
+	private TextView 		mTab1, mTab2, mTab3;
 	
 	/*loging status
 	 * 0-未变化 1-成功 2-失败 3-没有网络 4-未知错误
@@ -108,7 +110,7 @@ public class MainView extends Activity{
 		getWindow().setSoftInputMode(
 				WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN|
 				WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
-		instance = this;
+		instance 	 = this;
 		mainSettings = new Setting(this);
 		mainAccount  = new TheAccount(this);
 		
@@ -299,7 +301,7 @@ public class MainView extends Activity{
 								Toast.LENGTH_SHORT).show();
 					}else{
 						have_evaluation = true;
-						new Evaluation(instance).getOperation().start();
+						new Evaluation(instance,std,key).getOperation().start();
 						Waiting(5000, "显示成功前不要有操作");
 					}
 				}
@@ -391,6 +393,8 @@ public class MainView extends Activity{
 
 	private void Jwc_login(String num,String key){
 		new Thread(new AccountChecker(num, key, uihandler)).start();
+		this.std = num;
+		this.key = key;
 		Waiting(2000,"账号检查中");
 	}
 

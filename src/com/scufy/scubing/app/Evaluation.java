@@ -6,7 +6,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.scufy.scubing.data.TheAccount;
 import com.scufy.util.MHttpClient;
 
 import android.annotation.SuppressLint;
@@ -22,6 +21,8 @@ public class Evaluation {
 	private int sum_success = 0;
 	private int sum_fail 	= 0;
 	private int sum_all		= 0;
+	private String std		= "";
+	private String key		= "";
 	
 	private boolean is_list_success = false;
 	private boolean is_logined 		= false;
@@ -61,9 +62,16 @@ public class Evaluation {
 		}
 	};
 	
-	
-	public Evaluation(Context c){
+	/**
+	 * The Class of Evaluation
+	 * @param c The Main Context
+	 * @param u the student id
+	 * @param k	the student password
+	 */
+	public Evaluation(Context c,String u,String k){
 		this.cxt = c;
+		this.std = u;
+		this.key = k;
 	}
 	
 	public Thread getOperation(){
@@ -81,8 +89,8 @@ public class Evaluation {
 			
 			//-------login----------
 			String log_url 		= "http://202.115.47.141//loginAction.do";
-			String log_params 	= "zjh=" + new TheAccount(cxt).getStdId() +
-								  "&mm=" + new TheAccount(cxt).getJWCPwd();
+			String log_params 	= "zjh=" + std +
+								  "&mm=" + key;
 			
 			String log_res 		= client.doGet(log_url, log_params);
 			System.out.println(log_res);
