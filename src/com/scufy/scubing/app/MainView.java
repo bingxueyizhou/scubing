@@ -58,6 +58,7 @@ public class MainView extends Activity{
 	private RelativeLayout click_allgrade;
 	private RelativeLayout click_tools;
 	private RelativeLayout click_evaluation;
+	private RelativeLayout click_gpa;
 	private Button bu_login;
 	private Button bu_reset;
 	private CheckBox cBox_remember;
@@ -301,6 +302,21 @@ public class MainView extends Activity{
 						new Evaluation(instance).getOperation().start();
 						Waiting(5000, "显示成功前不要有操作");
 					}
+				}
+			}
+		});
+		//click gpa calculate
+		click_gpa = (RelativeLayout)view1.findViewById(R.id.item_cliked_gpa);
+		click_gpa.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (log_status != 1){
+					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
+					return;
+				}else{
+					Intent mainView_to_mainGpa = new Intent(
+							MainView.this,MainGpa.class);
+					startActivity(mainView_to_mainGpa);
 				}
 			}
 		});

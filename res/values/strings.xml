@@ -43,5 +43,9 @@
     
     <!-- mapp_evaluation -->
     <string name="app_evaluation">一键评教</string>
+    
+    <!-- mapp_evaluation -->
+    <string name="app_gpa">绩点计算</string>
+    <string name="app_gpa_copyright">[飞扬官网出品]</string>
 
 </resources>
