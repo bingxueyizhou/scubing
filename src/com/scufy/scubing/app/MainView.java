@@ -71,8 +71,6 @@ public class MainView extends Activity{
 	/*loging status
 	 * 0-未变化 1-成功 2-失败 3-没有网络 4-未知错误
 	 */
-	private int log_status = 0;
-	
 	//handler message
 	private final int MSG_LOGIN_SUCCESS  = 1;
 	private final int MSG_LOGIN_FAIL 	 = 2;
@@ -81,19 +79,22 @@ public class MainView extends Activity{
 	@SuppressLint("HandlerLeak")
 	private Handler uihandler = new Handler(){	
 		public void handleMessage(Message msg){
-			log_status = msg.what;
 			switch(msg.what){
 			case MSG_LOGIN_SUCCESS:
 				Toast.makeText(MainView.this, "成功", Toast.LENGTH_SHORT).show();
+				mainAccount.setLoginOK();
 				break;
 			case MSG_LOGIN_FAIL:
 				Toast.makeText(MainView.this, "失败", Toast.LENGTH_SHORT).show();
+				mainAccount.setLoginError();
 				break;
 			case MSG_NO_NETWORK:
 				Toast.makeText(MainView.this, "没有网络", Toast.LENGTH_SHORT).show();
+				mainAccount.setLoginError();
 				break;
 			case MSG_UNDEFINE_ERROR:
 				Toast.makeText(MainView.this, "未知错误", Toast.LENGTH_SHORT).show();
+				mainAccount.setLoginError();
 				break;
 			}
 		}
@@ -262,7 +263,7 @@ public class MainView extends Activity{
 							Toast.LENGTH_SHORT).show();
 				return;
 				/*
-				if (log_status != 1){
+				if (!mainAccount.getLoginStatus()){
 					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
 					return ;
 				}else{
@@ -292,7 +293,7 @@ public class MainView extends Activity{
 							Toast.LENGTH_SHORT).show();
 					return;
 				}
-				if (log_status != 1){
+				if (!mainAccount.getLoginStatus()){
 					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
 					return ;
 				}else{
@@ -312,7 +313,7 @@ public class MainView extends Activity{
 		click_gpa.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (log_status != 1){
+				if (!mainAccount.getLoginStatus()){
 					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
 					return;
 				}else{

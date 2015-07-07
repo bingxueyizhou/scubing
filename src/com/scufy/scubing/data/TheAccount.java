@@ -19,6 +19,7 @@ public class TheAccount {
 	private final String XML_NAME	  = "account";
 	private final String INFO_STD_ID  = "std_id";
 	private final String INFO_JWC_PWD = "jwc_pwd";
+	private final String INFO_IS_OK	  = "is_ok";
 	
 	private SharedPreferences spV;
 	private Editor spEditor;
@@ -64,6 +65,30 @@ public class TheAccount {
 	public void setJWCPwd(String s){
 		spEditor.putString(INFO_JWC_PWD, s);
 		save();
+	}
+	
+	/**
+	 * set login status success
+	 */
+	public void setLoginOK(){
+		spEditor.putBoolean(INFO_IS_OK, true);
+		save();
+	}
+	
+	/**
+	 * set login status fail
+	 */
+	public void setLoginError(){
+		spEditor.putBoolean(INFO_IS_OK, false);
+		save();
+	}
+	
+	/**
+	 * get login status
+	 * @return the boolean of login
+	 */
+	public boolean getLoginStatus(){
+		return spV.getBoolean(INFO_IS_OK, false);
 	}
 	
 	/**

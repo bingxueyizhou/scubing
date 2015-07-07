@@ -4,6 +4,7 @@ import com.scufy.scubing.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,10 +45,17 @@ public class MainGpa extends Activity{
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	@SuppressLint("SetJavaScriptEnabled")
 	private void onLoad() {
 		web_gpa.getSettings().setJavaScriptEnabled(true);
 		web_gpa.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+		/*
+		if (Build.VERSION.SDK_INT <= 18) {
+			web_gpa.getSettings().setSavePassword(true);
+	    } 
+		web_gpa.getSettings().setSaveFormData(false);*/
+		
 		web_gpa.loadUrl("http://gpa.fyscu.com/");
 		web_gpa.setWebViewClient(new WebViewClient(){
 	           @Override

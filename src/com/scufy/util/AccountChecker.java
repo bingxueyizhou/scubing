@@ -29,6 +29,7 @@ public class AccountChecker implements Runnable{
 		String log_params 	= "zjh="+ this.account + "&mm=" + this.key;
 		
 		String res;
+		System.out.println("消息:进入");
 		Message msg = new Message();
 		try {
 			res = HttpRequest.sendGet(log_url, log_params);
@@ -45,7 +46,7 @@ public class AccountChecker implements Runnable{
 		} catch (IOException e) {
 			msg.what = MSG_NO_NETWORK;
 		}
-		
+		System.out.println("消息"+msg.what);
 		handler.sendMessage(msg);
 	}
 
