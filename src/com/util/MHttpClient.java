@@ -1,4 +1,4 @@
-package com.scufy.util;
+package com.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;

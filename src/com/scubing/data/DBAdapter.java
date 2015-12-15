@@ -1,4 +1,4 @@
-package com.scufy.scubing.data;
+package com.scubing.data;
 
 import android.content.ContentValues;
 import android.content.Context;

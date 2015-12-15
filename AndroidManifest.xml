@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.scufy.scubing"
-    android:versionCode="4"
-    android:versionName="1.4。0" >
+    android:versionCode="5"
+    android:versionName="1.5.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -18,7 +18,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.scufy.scubing.Welcome"
+            android:name="com.scubing.Welcome"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,34 +29,41 @@
         
         <!-- 关于界面 -->
         <activity
-            android:name="com.scufy.scubing.app.MainAbout"
+            android:name="com.scubing.ui.MainAbout"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         
         <!-- 主操作界面  -->
         <activity
-            android:name="com.scufy.scubing.app.MainView"
+            android:name="com.scubing.ui.MainView"
             android:screenOrientation="portrait">
         </activity>
         
         <!-- 所有成绩查看界面  -->
         <activity
-            android:name="com.scufy.scubing.app.MainAllGrade"
+            android:name="com.scubing.ui.MainAllGrade"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         
         <!-- 技术工具  -->
         <activity
-            android:name="com.scufy.scubing.app.CMDTools"
+            android:name="com.scubing.ui.CMDTools"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         
         <!-- gpa计算  -->
         <activity
-            android:name="com.scufy.scubing.app.MainGpa"
+            android:name="com.scubing.ui.MainGpa"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <!-- 一键评教  -->
+        <activity
+            android:name="com.scubing.ui.MainEvaluation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>

@@ -1,4 +1,4 @@
-package com.scufy.scubing.app;
+package com.scubing.ui;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -17,9 +17,9 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 
+import com.scubing.data.DBAdapter;
+import com.scubing.data.TheAccount;
 import com.scufy.scubing.R;
-import com.scufy.scubing.data.DBAdapter;
-import com.scufy.scubing.data.TheAccount;
 
 
 import android.annotation.SuppressLint;

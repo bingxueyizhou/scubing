@@ -3,13 +3,18 @@
 
     <string name="app_name">川大飞扬</string>
     <string name="z">hello world</string>
+    <string name="empty"></string>
     
     <!-- main_about -->
-    <string name="version">\n开发者：飞扬研发-冰雪一舟\n
-        					\n版本号:v1.4.0\n
-        					\n反馈邮箱:1229095766@qq.com\n
-        					\n如遇问题请给开发者反馈问题，
+    <string name="about_author">\n开发者：飞扬研发-冰雪一舟\n</string>
+        					
+    <string name="about_version">版本号:v1.4.0</string>
+        					
+    <string name="about_email">\n反馈邮箱:1229095766@qq.com</string>
+     
+    <string name="about_more">\t\n如遇问题请给开发者反馈问题，
         					\n你的支持就是我们的进步</string>
+     
         					
     <!-- main_view -->
     <string name="main_app">应用</string>
@@ -43,6 +48,7 @@
     
     <!-- mapp_evaluation -->
     <string name="app_evaluation">一键评教</string>
+    <string name="app_eval_detail">评教详情</string>
     
     <!-- mapp_evaluation -->
     <string name="app_gpa">绩点计算</string>

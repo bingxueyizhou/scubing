@@ -1,4 +1,4 @@
-package com.scufy.scubing.app;
+package com.scubing.ui;
 
 import java.io.InputStreamReader;
 import java.io.LineNumberReader;

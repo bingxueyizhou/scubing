@@ -1,4 +1,4 @@
-package com.scufy.scubing.data;
+package com.scubing.data;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,8 +6,8 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 /**
- * @author �ޱ�
- * ���ñ������ȡ��
+ * @author 邹兵
+ * 设置保存类
  */
 
 public class Setting {

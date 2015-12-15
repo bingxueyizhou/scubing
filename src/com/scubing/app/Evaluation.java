@@ -1,4 +1,4 @@
-package com.scufy.scubing.app;
+package com.scubing.app;
 
 import java.util.ArrayList;
 
@@ -6,17 +6,18 @@ import org.apache.http.NameValuePair;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.scufy.util.MHttpClient;
+import com.util.MHttpClient;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.widget.Toast;
 
 public class Evaluation {
 	
+	@SuppressWarnings("unused")
 	private Context cxt;
 	private int sum_success = 0;
 	private int sum_fail 	= 0;
@@ -26,41 +27,61 @@ public class Evaluation {
 	
 	private boolean is_list_success = false;
 	private boolean is_logined 		= false;
+	private onEvalListener listener;
 	
 	private ArrayList<String> mainList = new ArrayList<String>();
 	
+	
+	/*loging status
+	 * 0-未变化 1-成功 2-失败 3-没有网络 4-未知错误
+	 */
 	//handler message
-	private final int MSG_LOGIN_SUCCESS  = 1;
-	private final int MSG_LOGIN_FAIL 	 = 2;
-	private final int MSG_NO_NETWORK	 = 3;
-	private final int MSG_UNDEFINE_ERROR = 4;
-	private final int MSG_FINISH_EXEC	 = 100;
+	private final int MSG_FINISHED = 1;
+	private final int MSG_PERFORM  = 2;
+	private final int MSG_STAT	   = 3;
 	@SuppressLint("HandlerLeak")
-	private Handler exechandler = new Handler(){	
+	private Handler uihandler = new Handler(){	
 		public void handleMessage(Message msg){
+			Bundle data = msg.getData();
 			switch(msg.what){
-			case MSG_LOGIN_SUCCESS:
-				Toast.makeText(cxt, "一键评教中……", Toast.LENGTH_SHORT).show();
+			case MSG_FINISHED:
+				listener.onFinished(data.getBoolean("ok"), 
+									data.getString("msg"));
 				break;
-			case MSG_LOGIN_FAIL:
-				Toast.makeText(cxt, "失败", Toast.LENGTH_SHORT).show();
+			case MSG_PERFORM:
+				listener.onPerform(	data.getInt("index"), 
+									data.getString("lesson"), 
+									data.getString("teacher"), 
+									data.getBoolean("ok"));
 				break;
-			case MSG_NO_NETWORK:
-				Toast.makeText(cxt, "没有网络", Toast.LENGTH_SHORT).show();
-				break;
-			case MSG_UNDEFINE_ERROR:
-				Toast.makeText(cxt, "未知错误", Toast.LENGTH_SHORT).show();
-				break;
-			case MSG_FINISH_EXEC:
-				Toast.makeText(cxt, "评价:"+sum_success+"条\n"+
-									 "失败"+sum_fail+"条\n共"+sum_all+"条", 
-									 Toast.LENGTH_SHORT).show();
-				Log.e("res","评价:"+sum_success+"条\n"+
-						 		"失败"+sum_fail+"条\n共"+sum_all+"条");
+			case MSG_STAT:
+				listener.onStat(	data.getInt("index"), 
+									data.getInt("success"), 
+									data.getInt("fail"),
+									data.getInt("sum"));
 				break;
 			}
 		}
 	};
+	
+	
+	public interface onEvalListener{
+		/**
+		 * 当抓取结束的回调函数
+		 */
+		public void onFinished(boolean ok,String msg);
+		
+		/**
+		 * 评教完一个后的回调
+		 */
+		public void onPerform(int index,String lesson,String teacher,boolean ok);
+		
+		/**
+		 * 评教过程中的统计回调
+		 */
+		public void onStat(int index,int success,int fail,int sum);
+		
+	}
 	
 	/**
 	 * The Class of Evaluation
@@ -74,18 +95,22 @@ public class Evaluation {
 		this.key = k;
 	}
 	
-	public Thread getOperation(){
+	@SuppressWarnings("unused")
+	private Thread getOperation(){
 		return new Thread(new Crawler());
+	}
+	
+	public void setEvalListener(onEvalListener listener){
+		this.listener = listener;
+		new Thread(new Crawler()).start();
 	}
 	
 	class Crawler implements Runnable{
 		
-		public Crawler() {}
-		
 		@Override
 		public void run() {
 			MHttpClient client   = new MHttpClient(new DefaultHttpClient());
-			Message msg = new Message();
+        	Message finalMsg = new Message();
 			
 			//-------login----------
 			String log_url 		= "http://202.115.47.141//loginAction.do";
@@ -101,11 +126,14 @@ public class Evaluation {
 			}
 					
 	        if (!is_logined){
-	        	msg.what = MSG_LOGIN_FAIL;
-				exechandler.sendMessage(msg);
+	        	finalMsg.what = MSG_FINISHED;
+	        	Bundle data = new Bundle();
+	        	data.putBoolean("ok", false);
+	        	data.putString("msg", "模拟登录失败");
+	        	finalMsg.setData(data);
+				uihandler.sendMessage(finalMsg);
 				return;
 			}
-			
 
 			//---------get some data---------
 			String list_res = client.doGet("http://202.115.47.141/jxpgXsAction.do",
@@ -136,8 +164,12 @@ public class Evaluation {
 			}
 			
 			if (!is_list_success){
-				msg.what = MSG_UNDEFINE_ERROR;
-				exechandler.sendMessage(msg);
+				finalMsg.what = MSG_FINISHED;
+	        	Bundle data = new Bundle();
+	        	data.putBoolean("ok", true);
+	        	data.putString("msg", "未定义错误");
+	        	finalMsg.setData(data);
+				uihandler.sendMessage(finalMsg);
 				return;
 			}
 			//--------deal num data--------
@@ -163,14 +195,13 @@ public class Evaluation {
 				form_params.add(new BasicNameValuePair("pgnr" , r[5]));
 				form_params.add(new BasicNameValuePair("oper" , "wjShow"));
 	            
-
 				client.doPost(form_url, form_params);
 	                
 				post_params = new ArrayList<NameValuePair>();
 				post_params.add(new BasicNameValuePair("wjbm",r[0]) );
 				post_params.add(new BasicNameValuePair("bpr", r[1]) );
 				post_params.add(new BasicNameValuePair("pgnr",r[5]) );
-				post_params.add(new BasicNameValuePair("zgpj", "IlikeIT") );
+				post_params.add(new BasicNameValuePair("zgpj", "Great") );
 				
 				if (r[1].indexOf("zj") < 0){
 					post_params.add(new BasicNameValuePair("0000000005","10_1") );
@@ -195,20 +226,56 @@ public class Evaluation {
 				
 				last_res = client.doPost(post_url, post_params);
 				
+				Message perMsg  = new Message();
+				Message statMsg = new Message();
+				Bundle perData  = new Bundle();
+				Bundle statData = new Bundle();
+				perMsg.what  = MSG_PERFORM;
+				statMsg.what = MSG_STAT;
 				if (last_res.indexOf("评估成功") > 0){
+					perData.putBoolean("ok", true);
 					sum_success ++;
 				}else{
+					perData.putBoolean("ok", false);
 					sum_fail ++;
 				}
+				perData.putInt("index", i);
+				perData.putString("lesson", r[0]);
+				perData.putString("teacher", r[1]);
+				perMsg.setData(perData);
+				uihandler.sendMessage(perMsg);
+				
+				statData.putInt("index", i);
+				statData.putInt("success", sum_success);
+				statData.putInt("fail", sum_fail);
+				statData.putInt("sum", sum_all);
+				statMsg.setData(statData);
+				uihandler.sendMessage(statMsg);
 
 				//Log.i("result", last_res+"\n\nsize:"+last_res.length());//失败-286
 				try {
 					Thread.sleep(100);
 				} catch (Exception e) {}
 			}
-
-			msg.what = MSG_FINISH_EXEC;
-			exechandler.sendMessage(msg);
+			if(sum_all == 0){
+				Message statMsg = new Message();
+				Bundle statData = new Bundle();
+				statMsg.what = MSG_STAT;
+				statData.putInt("index", 0);
+				statData.putInt("success", 0);
+				statData.putInt("fail", 0);
+				statData.putInt("sum", 0);
+				statMsg.setData(statData);
+				uihandler.sendMessage(statMsg);
+			}
+        	finalMsg.what = MSG_FINISHED;
+        	Bundle data = new Bundle();
+        	data.putBoolean("ok", true);
+        	data.putString("msg", "成功");
+        	finalMsg.setData(data);
+			uihandler.sendMessage(finalMsg);
+			//msg.what = MSG_FINISH_EXEC;
+			//exechandler.sendMessage(msg);
 		}
 	}
 }

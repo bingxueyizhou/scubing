@@ -1,12 +1,11 @@
-package com.scufy.scubing.app;
+package com.scubing.ui;
 
 import java.util.ArrayList;
 
+import com.scubing.data.Setting;
+import com.scubing.data.TheAccount;
 import com.scufy.scubing.R;
-import com.scufy.scubing.data.Setting;
-import com.scufy.scubing.data.TheAccount;
-import com.scufy.scubing.data.VIPList;
-import com.scufy.util.AccountChecker;
+import com.util.AccountChecker;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -49,8 +48,9 @@ public class MainView extends Activity{
 	//private View thisLayout;
 	//private LayoutInflater inflater;
 	private int 	TabIndex = 0;
-	private boolean have_evaluation = false;
+	@SuppressWarnings("unused")
 	private String 	std = "";
+	@SuppressWarnings("unused")
 	private String 	key = "";
 	
 	//control
@@ -288,24 +288,9 @@ public class MainView extends Activity{
 		click_evaluation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!new VIPList(instance).isVIP(new TheAccount(instance).getStdId())){
-					Toast.makeText(instance, "由于一些政策或其他原因该功能已经删除", 
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-				if (!mainAccount.getLoginStatus()){
-					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
-					return ;
-				}else{
-					if (have_evaluation){
-						Toast.makeText(instance, "请退出后进行下次评教", 
-								Toast.LENGTH_SHORT).show();
-					}else{
-						have_evaluation = true;
-						new Evaluation(instance,std,key).getOperation().start();
-						Waiting(5000, "显示成功前不要有操作");
-					}
-				}
+				Intent mainView_to_mainEval = new Intent(
+						MainView.this,MainEvaluation.class);
+				startActivity(mainView_to_mainEval);
 			}
 		});
 		//click gpa calculate

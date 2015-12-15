@@ -1,4 +1,4 @@
-package com.scufy.scubing.data;
+package com.scubing.data;
 
 import android.content.Context;
 
@@ -10,6 +10,9 @@ public class VIPList {
 			,"2013141461018" //陈德欣
 			,"2013141461025" //刘岱鑫
 			,"2013141461040" //陈培
+			,"2013141461003" //张坤
+			,"2013141461035" //陈增超
+			,"2013141461022" //杨涛
 	};
 	@SuppressWarnings("unused")
 	private Context cxt;

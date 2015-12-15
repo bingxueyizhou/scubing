@@ -1,6 +1,7 @@
-package com.scufy.scubing;
+package com.scubing;
 
-import com.scufy.scubing.app.MainView;
+import com.scubing.ui.MainView;
+import com.scufy.scubing.R;
 
 import android.os.Bundle;
 import android.os.Handler;

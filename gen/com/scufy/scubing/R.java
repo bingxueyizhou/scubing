@@ -58,93 +58,109 @@ public final class R {
         public static final int yf_logo_m=0x7f020011;
     }
     public static final class id {
-        public static final int bu_login=0x7f090014;
-        public static final int bu_reset=0x7f090016;
-        public static final int cBox_isAtoLogin=0x7f090019;
-        public static final int cBox_isRemember_ID=0x7f090018;
-        public static final int cmd_eT_input=0x7f09000d;
-        public static final int cmd_tV_content=0x7f09000c;
-        public static final int eT_password=0x7f090015;
-        public static final int eT_student_num=0x7f090017;
+        public static final int bu_login=0x7f09001e;
+        public static final int bu_reset=0x7f090020;
+        public static final int cBox_isAtoLogin=0x7f090023;
+        public static final int cBox_isRemember_ID=0x7f090022;
+        public static final int cmd_eT_input=0x7f090010;
+        public static final int cmd_tV_content=0x7f09000f;
+        public static final int eT_password=0x7f09001f;
+        public static final int eT_student_num=0x7f090021;
         public static final int im_version=0x7f090000;
-        public static final int item_cliked_allGrade=0x7f09001b;
-        public static final int item_cliked_evaluation=0x7f09001c;
-        public static final int item_cliked_gpa=0x7f09001d;
-        public static final int item_cliked_tools=0x7f09001e;
-        public static final int item_toclick_about=0x7f09001f;
-        public static final int main_bottom=0x7f090003;
-        public static final int mainweixin=0x7f090002;
-        public static final int mapp_allgrade_lV=0x7f09000b;
-        public static final int mapp_allgrade_tV=0x7f09000a;
-        public static final int mshow_cBox_lv=0x7f090010;
-        public static final int mshow_tV_Name_lv=0x7f090011;
-        public static final int mshow_tV_marks_lv=0x7f090012;
-        public static final int mshow_tV_point_lv=0x7f090013;
-        public static final int scrollView_app=0x7f09001a;
-        public static final int tV_about_info=0x7f090001;
-        public static final int tabpager=0x7f090007;
-        public static final int title=0x7f090008;
-        public static final int title_bottom=0x7f090009;
-        public static final int title_wV_refresh=0x7f09000e;
-        public static final int tv_main_account=0x7f090005;
-        public static final int tv_main_app=0x7f090004;
-        public static final int tv_main_setting=0x7f090006;
-        public static final int wV_app_gpa=0x7f09000f;
+        public static final int item_cliked_allGrade=0x7f090025;
+        public static final int item_cliked_evaluation=0x7f090026;
+        public static final int item_cliked_gpa=0x7f090027;
+        public static final int item_cliked_tools=0x7f090028;
+        public static final int item_toclick_about=0x7f090029;
+        public static final int main_bottom=0x7f090006;
+        public static final int mainweixin=0x7f090005;
+        public static final int mapp_allgrade_lV=0x7f09000e;
+        public static final int mapp_allgrade_tV=0x7f09000d;
+        public static final int mapp_eval_main_bu=0x7f090013;
+        public static final int mapp_eval_main_layout=0x7f090011;
+        public static final int mapp_eval_main_tV=0x7f090012;
+        public static final int mapp_eval_more_layout=0x7f090016;
+        public static final int mapp_eval_more_sV=0x7f090015;
+        public static final int mapp_eval_more_tV=0x7f090017;
+        public static final int mapp_eval_title=0x7f090014;
+        public static final int mshow_cBox_lv=0x7f09001a;
+        public static final int mshow_tV_Name_lv=0x7f09001b;
+        public static final int mshow_tV_marks_lv=0x7f09001c;
+        public static final int mshow_tV_point_lv=0x7f09001d;
+        public static final int scrollView_app=0x7f090024;
+        public static final int tV_about_author=0x7f090001;
+        public static final int tV_about_email=0x7f090003;
+        public static final int tV_about_more=0x7f090004;
+        public static final int tV_about_version=0x7f090002;
+        public static final int tabpager=0x7f09000a;
+        public static final int title=0x7f09000b;
+        public static final int title_bottom=0x7f09000c;
+        public static final int title_wV_refresh=0x7f090018;
+        public static final int tv_main_account=0x7f090008;
+        public static final int tv_main_app=0x7f090007;
+        public static final int tv_main_setting=0x7f090009;
+        public static final int wV_app_gpa=0x7f090019;
     }
     public static final class layout {
         public static final int main_about=0x7f030000;
         public static final int main_view=0x7f030001;
         public static final int mapp_allgrade=0x7f030002;
         public static final int mapp_cmd=0x7f030003;
-        public static final int mapp_gpa=0x7f030004;
-        public static final int mapp_grades_lv=0x7f030005;
-        public static final int mview_account=0x7f030006;
-        public static final int mview_app=0x7f030007;
-        public static final int mview_setting=0x7f030008;
-        public static final int welcome=0x7f030009;
+        public static final int mapp_evaluation=0x7f030004;
+        public static final int mapp_gpa=0x7f030005;
+        public static final int mapp_grades_lv=0x7f030006;
+        public static final int mview_account=0x7f030007;
+        public static final int mview_app=0x7f030008;
+        public static final int mview_setting=0x7f030009;
+        public static final int welcome=0x7f03000a;
     }
     public static final class string {
         /**  mview_setting 
          */
-        public static final int about=0x7f060006;
-        public static final int app_cmd=0x7f060011;
-        public static final int app_cmd_edit_hint=0x7f060014;
-        /**  mapp_cmd 
-         */
-        public static final int app_cmd_first=0x7f060013;
-        /**  mapp_evaluation 
-         */
-        public static final int app_evaluation=0x7f060015;
-        /**  mapp_evaluation 
-         */
-        public static final int app_gpa=0x7f060016;
-        public static final int app_gpa_copyright=0x7f060017;
-        public static final int app_name=0x7f060000;
-        public static final int ato_login=0x7f06000e;
-        public static final int calculate=0x7f06000c;
-        /**  mview_app 
-         */
-        public static final int grade_all=0x7f06000f;
-        public static final int grade_cal=0x7f060010;
-        public static final int login=0x7f06000a;
-        public static final int main_account=0x7f060004;
-        /**  main_view 
-         */
-        public static final int main_app=0x7f060003;
-        public static final int main_setting=0x7f060005;
-        public static final int password=0x7f060009;
-        public static final int remember_id=0x7f06000d;
-        public static final int reset=0x7f06000b;
-        public static final int student_num=0x7f060008;
-        /**  mapp_allgrade 
-         */
-        public static final int the_grade_list=0x7f060012;
-        /**  mview_account 
-         */
-        public static final int the_jwc_id=0x7f060007;
+        public static final int about=0x7f06000a;
         /**  main_about 
          */
-        public static final int version=0x7f060002;
+        public static final int about_author=0x7f060003;
+        public static final int about_email=0x7f060005;
+        public static final int about_more=0x7f060006;
+        public static final int about_version=0x7f060004;
+        public static final int app_cmd=0x7f060015;
+        public static final int app_cmd_edit_hint=0x7f060018;
+        /**  mapp_cmd 
+         */
+        public static final int app_cmd_first=0x7f060017;
+        public static final int app_eval_detail=0x7f06001a;
+        /**  mapp_evaluation 
+         */
+        public static final int app_evaluation=0x7f060019;
+        /**  mapp_evaluation 
+         */
+        public static final int app_gpa=0x7f06001b;
+        public static final int app_gpa_copyright=0x7f06001c;
+        public static final int app_name=0x7f060000;
+        public static final int ato_login=0x7f060012;
+        public static final int calculate=0x7f060010;
+        public static final int empty=0x7f060002;
+        /**  mview_app 
+         */
+        public static final int grade_all=0x7f060013;
+        public static final int grade_cal=0x7f060014;
+        public static final int login=0x7f06000e;
+        public static final int main_account=0x7f060008;
+        /**  main_view 
+         */
+        public static final int main_app=0x7f060007;
+        public static final int main_setting=0x7f060009;
+        public static final int password=0x7f06000d;
+        public static final int remember_id=0x7f060011;
+        public static final int reset=0x7f06000f;
+        public static final int student_num=0x7f06000c;
+        /**  mapp_allgrade 
+         */
+        public static final int the_grade_list=0x7f060016;
+        /**  mview_account 
+         */
+        public static final int the_jwc_id=0x7f06000b;
         public static final int z=0x7f060001;
     }
     public static final class style {

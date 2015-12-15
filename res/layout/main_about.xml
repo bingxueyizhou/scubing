@@ -15,11 +15,35 @@
         android:src="@drawable/yf_logo_m" />
 
     <TextView
-        android:id="@+id/tV_about_info"
+        android:id="@+id/tV_about_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="@string/version"
+        android:text="@string/about_author"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FF888888" />
+    <TextView
+        android:id="@+id/tV_about_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="@string/about_version"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FF888888" />
+    <TextView
+        android:id="@+id/tV_about_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="@string/about_email"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#FF888888" />
+    <TextView
+        android:id="@+id/tV_about_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="@string/about_more"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FF888888" />
 

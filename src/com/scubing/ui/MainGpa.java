@@ -1,10 +1,9 @@
-package com.scufy.scubing.app;
+package com.scubing.ui;
 
 import com.scufy.scubing.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -45,7 +44,6 @@ public class MainGpa extends Activity{
 		});
 	}
 
-	@SuppressWarnings("deprecation")
 	@SuppressLint("SetJavaScriptEnabled")
 	private void onLoad() {
 		web_gpa.getSettings().setJavaScriptEnabled(true);
