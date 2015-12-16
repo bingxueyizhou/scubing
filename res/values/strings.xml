@@ -28,7 +28,7 @@
     <string name="the_jwc_id">账号绑定</string>
     <string name="student_num">学号</string>
     <string name="password">密码</string>
-    <string name="login">登陆</string>
+    <string name="login">绑定</string>
     <string name="reset">重置</string>
     <string name="calculate">计算绩点</string>
     <string name="remember_id">记住账号</string>

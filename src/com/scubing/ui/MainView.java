@@ -67,6 +67,7 @@ public class MainView extends Activity{
 	private EditText 		ed_pwd;
 	private ViewPager 		vPager;
 	private TextView 		mTab1, mTab2, mTab3;
+	private ProgressDialog  loginDialog = null;
 	
 	/*loging status
 	 * 0-未变化 1-成功 2-失败 3-没有网络 4-未知错误
@@ -83,18 +84,22 @@ public class MainView extends Activity{
 			case MSG_LOGIN_SUCCESS:
 				Toast.makeText(MainView.this, "成功", Toast.LENGTH_SHORT).show();
 				mainAccount.setLoginOK();
+				loginDialog.dismiss();
 				break;
 			case MSG_LOGIN_FAIL:
 				Toast.makeText(MainView.this, "失败", Toast.LENGTH_SHORT).show();
 				mainAccount.setLoginError();
+				loginDialog.dismiss();
 				break;
 			case MSG_NO_NETWORK:
 				Toast.makeText(MainView.this, "没有网络", Toast.LENGTH_SHORT).show();
 				mainAccount.setLoginError();
+				loginDialog.dismiss();
 				break;
 			case MSG_UNDEFINE_ERROR:
 				Toast.makeText(MainView.this, "未知错误", Toast.LENGTH_SHORT).show();
 				mainAccount.setLoginError();
+				loginDialog.dismiss();
 				break;
 			}
 		}
@@ -288,9 +293,14 @@ public class MainView extends Activity{
 		click_evaluation.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent mainView_to_mainEval = new Intent(
-						MainView.this,MainEvaluation.class);
-				startActivity(mainView_to_mainEval);
+				if (!mainAccount.getLoginStatus()){
+					Toast.makeText(MainView.this, "未验证学号", Toast.LENGTH_SHORT).show();
+					return;
+				}else{
+					Intent mainView_to_mainEval = new Intent(
+							MainView.this,MainEvaluation.class);
+					startActivity(mainView_to_mainEval);
+				}
 			}
 		});
 		//click gpa calculate
@@ -381,10 +391,13 @@ public class MainView extends Activity{
 		new Thread(new AccountChecker(num, key, uihandler)).start();
 		this.std = num;
 		this.key = key;
-		Waiting(2000,"账号检查中");
+		loginDialog = android.app.ProgressDialog.show(
+				MainView.this, "登录中...", "请耐心等待");
+		//Waiting(2000,"账号检查中");
 	}
 
 	private long waiting_long;
+	@SuppressWarnings("unused")
 	private void Waiting(long l,String info){
 		waiting_long = l;
 		final ProgressDialog proDialog = android.app.ProgressDialog.show(

@@ -1,5 +1,6 @@
 package com.scubing.ui;
 
+import com.scubing.data.TheAccount;
 import com.scufy.scubing.R;
 
 import android.annotation.SuppressLint;
@@ -54,7 +55,11 @@ public class MainGpa extends Activity{
 	    } 
 		web_gpa.getSettings().setSaveFormData(false);*/
 		
-		web_gpa.loadUrl("http://gpa.fyscu.com/");
+		//web_gpa.loadUrl("http://gpa.fyscu.com/");
+		TheAccount mAccount = new TheAccount(this);
+		String url   = "http://gpa.fyscu.com/Home/Account/login";
+		String param = "account="+mAccount.getStdId()+"&password="+mAccount.getJWCPwd();
+		web_gpa.postUrl(url, param.getBytes());
 		web_gpa.setWebViewClient(new WebViewClient(){
 	           @Override
 	           public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -63,7 +68,7 @@ public class MainGpa extends Activity{
 	               return true;
 	           }
 	          });
-		//web_gpa.loadUrl("http://baidu.com");
+		web_gpa.loadUrl("http://gpa.fyscu.com/home/index/index.html");
 	}
 
 	private void initialize() {
