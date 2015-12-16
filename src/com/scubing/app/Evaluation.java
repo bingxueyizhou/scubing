@@ -240,8 +240,8 @@ public class Evaluation {
 					sum_fail ++;
 				}
 				perData.putInt("index", i);
-				perData.putString("lesson", r[0]);
-				perData.putString("teacher", r[1]);
+				perData.putString("lesson", r[4]);
+				perData.putString("teacher", r[2]);
 				perMsg.setData(perData);
 				uihandler.sendMessage(perMsg);
 				
